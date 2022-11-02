@@ -1,6 +1,16 @@
-C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/6YEA5652QU/moc_ServerData.cpp: C:/Projects/SaveData/serverSaveData/serverSaveData/include/ServerData.h \
-  C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/moc_predefs.h \
+clientSaveData_autogen/timestamp: \
+  CMakeFiles/3.21.1/CMakeCXXCompiler.cmake \
+  CMakeFiles/3.21.1/CMakeRCCompiler.cmake \
+  CMakeFiles/3.21.1/CMakeSystem.cmake \
+  clientSaveData_autogen/moc_predefs.h \
+  C:/Projects/SaveData/clientSaveData/clientSaveData/CMakeLists.txt \
+  C:/Projects/SaveData/clientSaveData/clientSaveData/include/ClientData.h \
+  C:/Projects/SaveData/clientSaveData/clientSaveData/src/ClientData.cpp \
+  C:/Projects/SaveData/clientSaveData/clientSaveData/src/main.cpp \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/QLocale \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/QObject \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/QTextStream \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/QThread \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qalgorithms.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qanystringview.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qarraydata.h \
@@ -20,17 +30,25 @@ C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qcontainerfwd.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qcontainerinfo.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qcontainertools_impl.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qcontiguouscache.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qdatastream.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qdeadlinetimer.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qdebug.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qelapsedtimer.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qflags.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qgenericatomic.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qglobal.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qglobalstatic.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qhash.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qhashfunctions.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qiodevice.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qiodevicebase.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qiterable.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qiterator.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qlist.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qlocale.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qlogging.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmap.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmath.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmetacontainer.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmetatype.h \
@@ -47,9 +65,14 @@ C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qrefcount.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qscopedpointer.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qscopeguard.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qset.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qshareddata.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qshareddata_impl.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qsharedpointer.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qsharedpointer_impl.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstring.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstringalgorithms.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstringconverter.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstringlist.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstringliteral.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstringmatcher.h \
@@ -59,11 +82,102 @@ C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qsystemdetection.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qtaggedpointer.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qtcore-config.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qtextstream.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qthread.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qtmetamacros.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qtypeinfo.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qutf8stringview.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qvariant.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qvarlengtharray.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qversiontagging.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtNetwork/QAbstractSocket \
+  C:/Qt6/6.2.0/mingw81_64/include/QtNetwork/qabstractsocket.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtNetwork/qtnetwork-config.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtNetwork/qtnetworkglobal.h \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/FindWrapAtomic.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/FindWrapOpenSSLHeaders.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/Qt6Config.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/Qt6ConfigExtras.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/Qt6ConfigVersion.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/Qt6Dependencies.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/Qt6Targets.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/Qt6VersionlessTargets.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/QtFeature.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/QtFeatureCommon.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/QtPublicCMakeVersionHelpers.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/QtPublicFinalizerHelpers.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/QtPublicFindPackageHelpers.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/QtPublicPluginHelpers.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/QtPublicTargetHelpers.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/QtPublicWalkLibsHelpers.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Core/Qt6CoreAdditionalTargetInfo.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Core/Qt6CoreConfig.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Core/Qt6CoreConfigExtras.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Core/Qt6CoreConfigVersion.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Core/Qt6CoreDependencies.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Core/Qt6CoreTargets-relwithdebinfo.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Core/Qt6CoreTargets.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Core/Qt6CoreVersionlessTargets.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6CoreTools/Qt6CoreToolsAdditionalTargetInfo.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6CoreTools/Qt6CoreToolsConfig.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6CoreTools/Qt6CoreToolsConfigVersion.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6CoreTools/Qt6CoreToolsDependencies.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6CoreTools/Qt6CoreToolsTargets-relwithdebinfo.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6CoreTools/Qt6CoreToolsTargets.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6CoreTools/Qt6CoreToolsVersionlessTargets.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6EntryPointPrivate/Qt6EntryPointPrivateAdditionalTargetInfo.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6EntryPointPrivate/Qt6EntryPointPrivateConfig.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6EntryPointPrivate/Qt6EntryPointPrivateConfigVersion.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6EntryPointPrivate/Qt6EntryPointPrivateTargets-relwithdebinfo.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6EntryPointPrivate/Qt6EntryPointPrivateTargets.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6EntryPointPrivate/Qt6EntryPointPrivateVersionlessTargets.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Network/Qt6NetworkAdditionalTargetInfo.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Network/Qt6NetworkConfig.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Network/Qt6NetworkConfigVersion.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Network/Qt6NetworkDependencies.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Network/Qt6NetworkTargets-relwithdebinfo.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Network/Qt6NetworkTargets.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Network/Qt6NetworkVersionlessTargets.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Test/Qt6TestAdditionalTargetInfo.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Test/Qt6TestConfig.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Test/Qt6TestConfigVersion.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Test/Qt6TestDependencies.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Test/Qt6TestTargets-relwithdebinfo.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Test/Qt6TestTargets.cmake \
+  C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Test/Qt6TestVersionlessTargets.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeCXXInformation.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeFindDependencyMacro.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeGenericSystem.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeParseArguments.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeRCInformation.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CheckCXXCompilerFlag.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CheckCXXSourceCompiles.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CheckIncludeFileCXX.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CheckLibraryExists.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Compiler/GNU-CXX.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Compiler/GNU.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/FindOpenSSL.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/FindPackageMessage.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/FindThreads.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Internal/CheckCompilerFlag.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Internal/CheckSourceCompiles.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Platform/Windows-GNU-CXX-ABI.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Platform/Windows-GNU-CXX.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Platform/Windows-GNU.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Platform/Windows-windres.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Platform/Windows.cmake \
+  C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Platform/WindowsPaths.cmake \
+  C:/Qt6/Tools/QtCreator/share/qtcreator/package-manager/auto-setup.cmake \
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed/limits.h \
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed/syslimits.h \
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/algorithm \
@@ -171,6 +285,7 @@ C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/string_conversions.h \
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/type_traits.h \
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/functional \
+  C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/future \
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/initializer_list \
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ios \
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/iosfwd \
@@ -253,4 +368,5 @@ C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_
   C:/Qt6/Tools/mingw810_64/x86_64-w64-mingw32/include/sys/types.h \
   C:/Qt6/Tools/mingw810_64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Qt6/Tools/mingw810_64/x86_64-w64-mingw32/include/wchar.h \
-  C:/Qt6/Tools/mingw810_64/x86_64-w64-mingw32/include/wctype.h
+  C:/Qt6/Tools/mingw810_64/x86_64-w64-mingw32/include/wctype.h \
+  C:/Qt6/Tools/CMake_64/bin/cmake.exe

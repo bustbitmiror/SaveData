@@ -1,12 +1,12 @@
 serverSaveData_autogen/timestamp: \
-	C:/Projects/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeCXXCompiler.cmake \
-	C:/Projects/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeRCCompiler.cmake \
-	C:/Projects/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeSystem.cmake \
-	C:/Projects/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/moc_predefs.h \
-	C:/Projects/serverSaveData/serverSaveData/CMakeLists.txt \
-	C:/Projects/serverSaveData/serverSaveData/include/ServerData.h \
-	C:/Projects/serverSaveData/serverSaveData/src/ServerData.cpp \
-	C:/Projects/serverSaveData/serverSaveData/src/main.cpp \
+	C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeCXXCompiler.cmake \
+	C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeRCCompiler.cmake \
+	C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeSystem.cmake \
+	C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/moc_predefs.h \
+	C:/Projects/SaveData/serverSaveData/serverSaveData/CMakeLists.txt \
+	C:/Projects/SaveData/serverSaveData/serverSaveData/include/ServerData.h \
+	C:/Projects/SaveData/serverSaveData/serverSaveData/src/ServerData.cpp \
+	C:/Projects/SaveData/serverSaveData/serverSaveData/src/main.cpp \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/QObject \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qalgorithms.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qanystringview.h \

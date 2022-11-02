@@ -1,4 +1,4 @@
-# Install script for directory: C:/Projects/clientSaveData/clientSaveData
+# Install script for directory: C:/Projects/SaveData/clientSaveData/clientSaveData
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -3,7 +3,7 @@
 #define __cpp_attributes 200809
 #define __UINT_LEAST16_MAX__ 0xffff
 #define __ATOMIC_ACQUIRE 2
-#define QT_TESTCASE_BUILDDIR "C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug"
+#define QT_TESTCASE_BUILDDIR "C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug"
 #define __FLT128_MAX_10_EXP__ 4932
 #define __FLT_MIN__ 1.17549435082228750796873653722224568e-38F
 #define __GCC_IEC_559_COMPLEX 2
@@ -162,7 +162,7 @@
 #define __FLT64X_MIN_EXP__ (-16381)
 #define __SIZEOF_WINT_T__ 2
 #define __LONG_LONG_WIDTH__ 64
-#define QT_TESTCASE_SOURCEDIR "C:/Projects/clientSaveData/clientSaveData"
+#define QT_TESTCASE_SOURCEDIR "C:/Projects/SaveData/clientSaveData/clientSaveData"
 #define __cpp_initializer_lists 200806
 #define __FLT32_MAX_EXP__ 128
 #define __cpp_hex_float 201603

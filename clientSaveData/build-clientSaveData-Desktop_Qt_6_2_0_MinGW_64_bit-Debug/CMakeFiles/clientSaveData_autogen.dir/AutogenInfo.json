@@ -1,16 +1,16 @@
 {
-	"BUILD_DIR" : "C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen",
-	"CMAKE_BINARY_DIR" : "C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug",
-	"CMAKE_CURRENT_BINARY_DIR" : "C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug",
-	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Projects/clientSaveData/clientSaveData",
+	"BUILD_DIR" : "C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Projects/SaveData/clientSaveData/clientSaveData",
 	"CMAKE_EXECUTABLE" : "C:/Qt6/Tools/CMake_64/bin/cmake.exe",
 	"CMAKE_LIST_FILES" : 
 	[
-		"C:/Projects/clientSaveData/clientSaveData/CMakeLists.txt",
+		"C:/Projects/SaveData/clientSaveData/clientSaveData/CMakeLists.txt",
 		"C:/Qt6/Tools/QtCreator/share/qtcreator/package-manager/auto-setup.cmake",
-		"C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeSystem.cmake",
+		"C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeSystem.cmake",
 		"C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake",
-		"C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeCXXCompiler.cmake",
+		"C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeCXXCompiler.cmake",
 		"C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake",
 		"C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeGenericSystem.cmake",
 		"C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake",
@@ -23,7 +23,7 @@
 		"C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake",
 		"C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Platform/Windows-GNU-CXX.cmake",
 		"C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Platform/Windows-GNU.cmake",
-		"C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeRCCompiler.cmake",
+		"C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeRCCompiler.cmake",
 		"C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeRCInformation.cmake",
 		"C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Platform/Windows-windres.cmake",
 		"C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/Platform/Windows-GNU-CXX-ABI.cmake",
@@ -201,28 +201,28 @@
 		"C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Network/Qt6NetworkAdditionalTargetInfo.cmake",
 		"C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6Network/Qt6NetworkVersionlessTargets.cmake"
 	],
-	"CMAKE_SOURCE_DIR" : "C:/Projects/clientSaveData/clientSaveData",
-	"DEP_FILE" : "C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen/deps",
+	"CMAKE_SOURCE_DIR" : "C:/Projects/SaveData/clientSaveData/clientSaveData",
+	"DEP_FILE" : "C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen/deps",
 	"DEP_FILE_RULE_NAME" : "clientSaveData_autogen/timestamp",
 	"HEADERS" : 
 	[
 		[
-			"C:/Projects/clientSaveData/clientSaveData/include/ClientData.h",
+			"C:/Projects/SaveData/clientSaveData/clientSaveData/include/ClientData.h",
 			"Mu",
 			"6YEA5652QU/moc_ClientData.cpp",
 			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen/include",
-	"MOC_COMPILATION_FILE" : "C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen/include",
+	"MOC_COMPILATION_FILE" : "C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
 		"MINGW_HAS_SECURE_API=1",
 		"QT_CORE_LIB",
 		"QT_NETWORK_LIB",
-		"QT_TESTCASE_BUILDDIR=\"C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug\"",
-		"QT_TESTCASE_SOURCEDIR=\"C:/Projects/clientSaveData/clientSaveData\"",
+		"QT_TESTCASE_BUILDDIR=\"C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug\"",
+		"QT_TESTCASE_SOURCEDIR=\"C:/Projects/SaveData/clientSaveData/clientSaveData\"",
 		"QT_TESTLIB_LIB",
 		"UNICODE",
 		"WIN32",
@@ -241,11 +241,11 @@
 	],
 	"MOC_INCLUDES" : 
 	[
-		"C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug",
-		"C:/Projects/clientSaveData/clientSaveData",
-		"C:/Projects/clientSaveData/clientSaveData/tests",
-		"C:/Projects/clientSaveData/clientSaveData/include",
-		"C:/Projects/clientSaveData/clientSaveData/src",
+		"C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug",
+		"C:/Projects/SaveData/clientSaveData/clientSaveData",
+		"C:/Projects/SaveData/clientSaveData/clientSaveData/tests",
+		"C:/Projects/SaveData/clientSaveData/clientSaveData/include",
+		"C:/Projects/SaveData/clientSaveData/clientSaveData/src",
 		"C:/Qt6/6.2.0/mingw81_64/include/QtCore",
 		"C:/Qt6/6.2.0/mingw81_64/include",
 		"C:/Qt6/6.2.0/mingw81_64/mkspecs/win32-g++",
@@ -269,25 +269,29 @@
 		"-c",
 		"C:/Qt6/Tools/CMake_64/share/cmake-3.21/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : [],
 	"MULTI_CONFIG" : false,
 	"PARALLEL" : 4,
-	"PARSE_CACHE_FILE" : "C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/clientSaveData_autogen.dir/ParseCache.txt",
+	"PARSE_CACHE_FILE" : "C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/clientSaveData_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "C:/Qt6/6.2.0/mingw81_64/./bin/moc.exe",
 	"QT_UIC_EXECUTABLE" : "",
 	"QT_VERSION_MAJOR" : 6,
 	"QT_VERSION_MINOR" : 2,
-	"SETTINGS_FILE" : "C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/clientSaveData_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/clientSaveData_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
 		[
-			"C:/Projects/clientSaveData/clientSaveData/src/ClientData.cpp",
+			"C:/Projects/SaveData/clientSaveData/clientSaveData/src/ClientData.cpp",
 			"Mu",
 			null
 		],
-		[ "C:/Projects/clientSaveData/clientSaveData/src/main.cpp", "Mu", null ]
+		[
+			"C:/Projects/SaveData/clientSaveData/clientSaveData/src/main.cpp",
+			"Mu",
+			null
+		]
 	],
 	"VERBOSITY" : 0
 }

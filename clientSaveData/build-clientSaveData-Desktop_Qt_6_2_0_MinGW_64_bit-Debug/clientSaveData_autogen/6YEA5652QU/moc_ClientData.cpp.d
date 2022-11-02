@@ -1,5 +1,5 @@
-C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen/6YEA5652QU/moc_ClientData.cpp: C:/Projects/clientSaveData/clientSaveData/include/ClientData.h \
-  C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen/moc_predefs.h \
+C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen/6YEA5652QU/moc_ClientData.cpp: C:/Projects/SaveData/clientSaveData/clientSaveData/include/ClientData.h \
+  C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen/moc_predefs.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/QLocale \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/QObject \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/QTextStream \

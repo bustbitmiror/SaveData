@@ -1,5 +1,5 @@
-C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/clientSaveData.dir
-C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
-C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
-C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/clientSaveData_autogen_timestamp_deps.dir
-C:/Projects/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/clientSaveData_autogen.dir
+C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/clientSaveData.dir
+C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/clientSaveData_autogen_timestamp_deps.dir
+C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/clientSaveData_autogen.dir
