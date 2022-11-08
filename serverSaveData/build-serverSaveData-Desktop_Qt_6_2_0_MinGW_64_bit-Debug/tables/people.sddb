@@ -1,0 +1,9 @@
+{
+    "data": [
+    ],
+    "types": {
+        "firstname": "string",
+        "id": "int",
+        "lastname": "string"
+    }
+}

@@ -6,6 +6,7 @@ class QTcpSocket;
 class QTcpServer;
 class QTextStream;
 class QDataStream;
+class QDir;
 
 class ServerData : public QObject {
 Q_OBJECT
@@ -14,6 +15,7 @@ private:
     QTcpServer* m_tcpServer;
     quint16 m_NextBlockSize;
     QTextStream* conOutput;
+    QDir* dir;
 
 private:
     void sendToClient(QTcpSocket* pSocket, const QString& message);

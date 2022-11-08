@@ -80,7 +80,7 @@ void ClientData::slotError(QAbstractSocket::SocketError err){  // вероятн
 
 
 void ClientData::slotConnectedAndTransfer(){
-    *out << "Welcoe to SaveData!\n\n";
+    *out << "Welcome to SaveData!\n\n";
     out->flush();
     QThread::sleep(1);
     while(true){
@@ -217,41 +217,39 @@ QString ClientData::createTable(){
     out->flush();
     namesColumns = in->readLine();
     in->flush();
-
     QStringList column = namesColumns.split(u' ', Qt::SkipEmptyParts);
-    QStringList::iterator itCol;
-    for (itCol = column.begin(); itCol != column.end(); ++itCol){
-        *out << "Column type " << *itCol << ":";
+
+    QStringList typesColumns;
+
+    while(typesColumns.size() != column.size()){
+        *out << "Column type (separated by a space): ";
         out->flush();
-        QString type = in->readLine();
+
+        typesColumns = (in->readLine()).split(u' ', Qt::SkipEmptyParts);
         in->flush();
-        // нужна проверка на соответствие с типом доступным
 
-        resultCommand += *itCol + " " + type;
-
-        //columnsAndTypes[*itCol] = type;
+        if(typesColumns.size() != column.size()){
+            *out << "Unequal number of columns and types!\n";
+            out->flush();
+        }
     }
-//    for (int i = 0; i < namesColumns.size(); i++){
-//        if(namesColumns[i] != ' '){         // тут похорошему добавить regex
-//            column += namesColumns[i];
-//        } else {
-//            *out << "Column type " << column << ":";
-//            out->flush();
-//            QString type = in->readLine();
-//            in->flush();
-//            // нужна проверка на соответствие с типом доступным
-//            columnsAndTypes[column] = type;
-//            column = "";
-//        }
-//    }
 
-//    QMap<QString, QString>::iterator it;
-//    for(it = columnsAndTypes.begin(); it != columnsAndTypes.end(); ++it){
-//        resultCommand += it.key() + " " + it.value();
-//        if (it++ != columnsAndTypes.end()){
-//            resultCommand += ',';
-//        }
-//    }
+
+    for (int i = 0; i < column.size(); i++){
+        // нужна проверка на соответствие с типом доступным
+        columnsAndTypes[column.at(i)] = typesColumns.at(i);
+
+
+        resultCommand += column.at(i) + " " + typesColumns.at(i);
+
+    }
+
+    QMap<QString, QString>::const_iterator i = columnsAndTypes.constBegin();
+    while (i != columnsAndTypes.constEnd()) {
+        *out << i.key() << ": " << i.value() << Qt::endl << Qt::flush;
+        //out->flush();
+        ++i;
+    }
 
     resultCommand += ");";
 
