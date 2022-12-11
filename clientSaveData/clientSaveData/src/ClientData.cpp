@@ -6,6 +6,9 @@
 #include <iostream>
 #include <QCoreApplication>
 #include <QTime>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 
 ClientData::ClientData(const QString& host, int port) : m_NextBlockSize(0)
@@ -15,6 +18,7 @@ ClientData::ClientData(const QString& host, int port) : m_NextBlockSize(0)
     
     in = new QTextStream(stdin);
     out = new QTextStream(stdout);
+    bufferResponse = new QByteArray;
 
     // соединяем слоты
     connect(m_tcpSocket, SIGNAL(connected()), SLOT(slotConnectedAndTransfer()));
@@ -39,12 +43,32 @@ void ClientData::slotReadyRead(){
             break;
         }
 
-        QString str;
+        // ловим ответ от сервера в json и записываем в буфер
 
-        inData >> str;
+        /*
+            Ответ 2 видов json:
+            {
+                "type" : "message",
+                "response" : "..." <-- string обычный
+            }
 
-        *out << str << '\n';
-        out->flush();
+            {
+                "type" : "information", <-- информация о таблице
+                "columns" : ["...", "..."],
+                "types" : {
+                    "id" : "int",
+                    "name" : "string",
+                    ...
+                }
+            }
+
+            После получения и обработки ответа, чистить буфер!!!
+        */
+
+
+        inData >> *bufferResponse;  // записали
+
+        //*out << str << '\n' << Qt::flush;
         m_NextBlockSize = 0;
     }
 }
@@ -104,18 +128,89 @@ void ClientData::slotConnectedAndTransfer(){
 
         switch (choice) {
             case CREATE_TABLE:{
-                QString command = createTable();
-                *out << command << '\n';
-                out->flush();
+                QByteArray command = createTable(); // сформировали запрос
+                std::system("cls");
+                //*out << "The request has been sent." << Qt::endl << Qt::flush;
+                sendMessageToServer(command);       // отправили на сервер
+
+                // ждем ответа от сервера json вида
+                m_tcpSocket->waitForReadyRead();
+
+                QJsonDocument response = QJsonDocument::fromJson(*bufferResponse);
+                bufferResponse->clear();
+                QJsonObject proc = response.object();
+
+                if (proc.value("type").toString() == "message"){
+                    *out << proc.value("response").toString() << Qt::flush;
+                }
+                *out << "\n\nPlease press any button...\n" << Qt::flush;
                 std::cin.get();
                 break;
             }
 
             case SHOW_TABLE:{
+                QByteArray command = viewsTable();
+                std::system("cls");
+               // *out << "The request has been sent." << Qt::endl << Qt::flush;
+                sendMessageToServer(command);       // отправили на сервер
+
+                // ждем ответа от сервера
+                m_tcpSocket->waitForReadyRead();
+                QJsonDocument response = QJsonDocument::fromJson(*bufferResponse);
+                bufferResponse->clear();
+                QJsonObject proc = response.object();
+
+                if (proc.value("type").toString() == "message"){
+                    *out << proc.value("response").toString() << Qt::flush;
+                }
+                *out << "\n\nPlease press any button...\n" << Qt::flush;
+                std::cin.get();
+                break;
+            }
+            case VIEWS_STRUCT:{
+                QByteArray command = viewsStruct();
+                std::system("cls");
+               // *out << "The request has been sent." << Qt::endl << Qt::flush;
+                sendMessageToServer(command);       // отправили на сервер
+
+                // ждем ответа от сервера
+                m_tcpSocket->waitForReadyRead();
+                QJsonDocument response = QJsonDocument::fromJson(*bufferResponse);
+                bufferResponse->clear();
+                QJsonObject proc = response.object();
+
+                if (proc.value("type").toString() == "message"){
+                    *out << proc.value("response").toString() << Qt::flush;
+                }
+                *out << "\n\nPlease press any button...\n" << Qt::flush;
+                std::cin.get();
                 break;
             }
 
             case INSERT_DATA:{
+                QByteArray command = insertDataInTable();
+
+                if (!command.isNull()){
+                    std::system("cls");
+                   // *out << "The request has been sent." << Qt::endl << Qt::flush;
+                    sendMessageToServer(command);       // отправили на сервер
+
+                    // ждем ответа от сервера
+                    m_tcpSocket->waitForReadyRead();
+                    QJsonDocument response = QJsonDocument::fromJson(*bufferResponse);
+                    bufferResponse->clear();
+                    QJsonObject proc = response.object();
+
+                    if (proc.value("type").toString() == "message"){
+                        *out << proc.value("response").toString() << Qt::flush;
+                    }
+                    *out << "\n\nPlease press any button...\n" << Qt::flush;
+                    std::cin.get();
+                } else if (command.isNull()){
+                    *out << "\n\nPlease press any button...\n" << Qt::flush;
+                    std::cin.get();
+                }
+
                 break;
             }
 
@@ -147,7 +242,7 @@ void ClientData::slotConnectedAndTransfer(){
 
 }
 
-void ClientData::sendMessageToServer(QString& command){
+void ClientData::sendMessageToServer(QByteArray& command){  // отправка сформированной команды
     QByteArray arrBlock;
     QDataStream dataOut(&arrBlock, QIODevice::WriteOnly);
 
@@ -181,10 +276,11 @@ void ClientData::Menu(){
     std::system("cls");
     *out << "1. Create table\n";
     *out << "2. Viewing existing tables\n";
-    *out << "3. Inserting data into a table (insert into ... values ... )\n";
-    *out << "4. Reading data from a table (select ... from ... where ... )\n";
-    *out << "5. Changing the data in the table (update ... set ... where ...)\n";
-    *out << "6. Deleting tables/rows/columns (delete ... / delete from ... where ... )\n\n";
+    *out << "3. Viewing the table structure (column names, types)\n";
+    *out << "4. Inserting data into a table (insert into ... values ... )\n";
+    *out << "5. Reading data from a table (select ... from ... where ... )\n";
+    *out << "6. Changing the data in the table (update ... set ... where ...)\n";
+    *out << "7. Deleting tables/rows/columns (delete ... / delete from ... where ... )\n\n";
     *out << "For reference, enter the command 'help'.\n";
     *out << "To exit, enter the command 'exit'.\n";
     *out << "command > ";
@@ -192,78 +288,3 @@ void ClientData::Menu(){
 
 
 }
-
-
-
-//--------------- Commands----------------
-
-QString ClientData::createTable(){
-    std::system("cls");
-    QString resultCommand = "create table ";
-
-    QMap<QString, QString> columnsAndTypes;
-    QString nameTable;
-    QString namesColumns;
-
-    *out << "Table name: ";
-    out->flush();
-
-    nameTable = in->readLine();
-    in->flush();
-    resultCommand += nameTable + " ";
-    resultCommand += "(";
-
-    *out << "Column names (separated by a space): ";
-    out->flush();
-    namesColumns = in->readLine();
-    in->flush();
-    QStringList column = namesColumns.split(u' ', Qt::SkipEmptyParts);
-
-    QStringList typesColumns;
-
-    while(typesColumns.size() != column.size()){
-        *out << "Column type (separated by a space): ";
-        out->flush();
-
-        typesColumns = (in->readLine()).split(u' ', Qt::SkipEmptyParts);
-        in->flush();
-
-        if(typesColumns.size() != column.size()){
-            *out << "Unequal number of columns and types!\n";
-            out->flush();
-        }
-    }
-
-
-    for (int i = 0; i < column.size(); i++){
-        // нужна проверка на соответствие с типом доступным
-        columnsAndTypes[column.at(i)] = typesColumns.at(i);
-
-
-        resultCommand += column.at(i) + " " + typesColumns.at(i);
-
-    }
-
-    QMap<QString, QString>::const_iterator i = columnsAndTypes.constBegin();
-    while (i != columnsAndTypes.constEnd()) {
-        *out << i.key() << ": " << i.value() << Qt::endl << Qt::flush;
-        //out->flush();
-        ++i;
-    }
-
-    resultCommand += ");";
-
-//    *out << nameTable << '\n';
-//    out->flush();
-
-
-
-    //std::cin.get();
-
-    return resultCommand;
-}
-
-
-
-
-

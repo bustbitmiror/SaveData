@@ -18,7 +18,9 @@ private:
     QDir* dir;
 
 private:
-    void sendToClient(QTcpSocket* pSocket, const QString& message);
+    void sendToClient(QTcpSocket* pSocket, QByteArray& response);
+    QByteArray jsonResponse(QString message);
+    //QByteArray jsonResponse(QString type, QByteArray& information);
 
 
 public:

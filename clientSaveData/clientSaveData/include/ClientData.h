@@ -5,11 +5,11 @@
 #include <QThread>
 #include <QTextStream>
 #include <QLocale>
+#include <QVector>
 class QAbstractSocket;
 class QTcpSocket;
 class QTextStream;
 class QDataStream;
-
 
 
 
@@ -21,6 +21,8 @@ private:
     quint16 m_NextBlockSize;
     QTextStream* out;
     QTextStream* in;  // не надо скорее всего, здесь только ответы от сервера
+    QVector<QString> typesCol = {"int", "double", "string", "bool"};  // типы наших колонок
+    QByteArray* bufferResponse;  // буфер ответа от сервера
 
 public:
     ClientData(const QString& host, int port);
@@ -28,12 +30,15 @@ public:
 
 //commands, типа обработчик команд, общая функция и сами команды
 public:
-    enum Command {CREATE_TABLE = 1, SHOW_TABLE = 2, INSERT_DATA = 3, READ_DATA = 4, CHANGE_DATA = 5, DELETE_DATA = 6};
-    QString createTable();
+    enum Command {CREATE_TABLE = 1, SHOW_TABLE = 2, VIEWS_STRUCT = 3, INSERT_DATA = 4, READ_DATA = 5, CHANGE_DATA = 6, DELETE_DATA = 7};
+    QByteArray createTable();
+    QByteArray viewsTable();
+    QByteArray insertDataInTable();
+    QByteArray viewsStruct();
 
 
 private:
-    void sendMessageToServer(QString& str);
+    void sendMessageToServer(QByteArray& str);
     void Menu();
     void Help();
 

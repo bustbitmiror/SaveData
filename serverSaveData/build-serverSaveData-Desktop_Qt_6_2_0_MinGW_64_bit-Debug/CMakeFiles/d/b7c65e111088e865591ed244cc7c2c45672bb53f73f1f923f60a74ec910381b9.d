@@ -5,6 +5,7 @@ serverSaveData_autogen/timestamp: \
   serverSaveData_autogen/moc_predefs.h \
   C:/Projects/SaveData/serverSaveData/serverSaveData/CMakeLists.txt \
   C:/Projects/SaveData/serverSaveData/serverSaveData/include/ServerData.h \
+  C:/Projects/SaveData/serverSaveData/serverSaveData/include/StreamTable.h \
   C:/Projects/SaveData/serverSaveData/serverSaveData/src/ServerData.cpp \
   C:/Projects/SaveData/serverSaveData/serverSaveData/src/main.cpp \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/QObject \

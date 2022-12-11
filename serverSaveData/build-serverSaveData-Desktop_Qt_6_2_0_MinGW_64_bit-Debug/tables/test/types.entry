@@ -1,0 +1,12 @@
+{
+    "columns": [
+        "id",
+        "fuck",
+        "shit"
+    ],
+    "types": {
+        "fuck": "string",
+        "id": "int",
+        "shit": "string"
+    }
+}

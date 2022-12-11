@@ -1,0 +1,10 @@
+{
+    "columns": [
+        "id",
+        "type"
+    ],
+    "types": {
+        "id": "int",
+        "type": "string"
+    }
+}

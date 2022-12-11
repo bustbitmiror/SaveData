@@ -259,3 +259,4 @@ C:/Projects/SaveData/serverSaveData/serverSaveData/include/ServerData.h
  mdp:C:/Qt6/Tools/mingw810_64/x86_64-w64-mingw32/include/wctype.h
 C:/Projects/SaveData/serverSaveData/serverSaveData/src/ServerData.cpp
 C:/Projects/SaveData/serverSaveData/serverSaveData/src/main.cpp
+C:/Projects/SaveData/serverSaveData/serverSaveData/include/StreamTable.h

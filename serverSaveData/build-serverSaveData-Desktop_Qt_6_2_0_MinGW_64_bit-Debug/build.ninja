@@ -141,7 +141,7 @@ build serverSaveData_autogen/timestamp serverSaveData_autogen/mocs_compilation.c
 #############################################
 # Phony custom command for CMakeFiles\serverSaveData_autogen_timestamp_deps
 
-build CMakeFiles/serverSaveData_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/serverSaveData_autogen_timestamp_deps: phony C$:/Qt6/6.2.0/mingw81_64/./bin/moc.exe C$:/Qt6/6.2.0/mingw81_64/bin/Qt6Network.dll C$:/Qt6/6.2.0/mingw81_64/bin/Qt6Core.dll
+build CMakeFiles/serverSaveData_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/serverSaveData_autogen_timestamp_deps: phony C$:/Qt6/6.2.0/mingw81_64/./bin/moc.exe C$:/Qt6/6.2.0/mingw81_64/bin/Qt6Core.dll C$:/Qt6/6.2.0/mingw81_64/bin/Qt6Network.dll
 
 
 #############################################

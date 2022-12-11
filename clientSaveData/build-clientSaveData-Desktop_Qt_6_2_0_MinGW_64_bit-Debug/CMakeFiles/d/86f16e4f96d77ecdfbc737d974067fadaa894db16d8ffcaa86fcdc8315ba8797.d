@@ -6,11 +6,13 @@ clientSaveData_autogen/timestamp: \
   C:/Projects/SaveData/clientSaveData/clientSaveData/CMakeLists.txt \
   C:/Projects/SaveData/clientSaveData/clientSaveData/include/ClientData.h \
   C:/Projects/SaveData/clientSaveData/clientSaveData/src/ClientData.cpp \
+  C:/Projects/SaveData/clientSaveData/clientSaveData/src/Commands.cpp \
   C:/Projects/SaveData/clientSaveData/clientSaveData/src/main.cpp \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/QLocale \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/QObject \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/QTextStream \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/QThread \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/QVector \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qalgorithms.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qanystringview.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qarraydata.h \
@@ -89,6 +91,7 @@ clientSaveData_autogen/timestamp: \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qutf8stringview.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qvariant.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qvarlengtharray.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qvector.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qversiontagging.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtNetwork/QAbstractSocket \
   C:/Qt6/6.2.0/mingw81_64/include/QtNetwork/qabstractsocket.h \

@@ -1,0 +1,10 @@
+{
+    "columns": [
+        "id",
+        "boom"
+    ],
+    "types": {
+        "boom": "double",
+        "id": "int"
+    }
+}

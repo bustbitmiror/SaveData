@@ -65,6 +65,14 @@ build CMakeFiles/clientSaveData.dir/src/ClientData.cpp.obj: CXX_COMPILER__client
   OBJECT_DIR = CMakeFiles\clientSaveData.dir
   OBJECT_FILE_DIR = CMakeFiles\clientSaveData.dir\src
 
+build CMakeFiles/clientSaveData.dir/src/Commands.cpp.obj: CXX_COMPILER__clientSaveData_Debug C$:/Projects/SaveData/clientSaveData/clientSaveData/src/Commands.cpp || cmake_object_order_depends_target_clientSaveData
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_NETWORK_LIB -DQT_TESTCASE_BUILDDIR=\"C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug\" -DQT_TESTCASE_SOURCEDIR=\"C:/Projects/SaveData/clientSaveData/clientSaveData\" -DQT_TESTLIB_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0601 -D_WIN64
+  DEP_FILE = CMakeFiles\clientSaveData.dir\src\Commands.cpp.obj.d
+  FLAGS = -g -Wno-error=invalid-offsetof -std=gnu++17
+  INCLUDES = -IC:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug -IC:/Projects/SaveData/clientSaveData/clientSaveData -IC:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/clientSaveData_autogen/include -IC:/Projects/SaveData/clientSaveData/clientSaveData/tests -IC:/Projects/SaveData/clientSaveData/clientSaveData/include -IC:/Projects/SaveData/clientSaveData/clientSaveData/src -isystem C:/Qt6/6.2.0/mingw81_64/include/QtCore -isystem C:/Qt6/6.2.0/mingw81_64/include -isystem C:/Qt6/6.2.0/mingw81_64/mkspecs/win32-g++ -isystem C:/Qt6/6.2.0/mingw81_64/include/QtTest -isystem C:/Qt6/6.2.0/mingw81_64/include/QtNetwork
+  OBJECT_DIR = CMakeFiles\clientSaveData.dir
+  OBJECT_FILE_DIR = CMakeFiles\clientSaveData.dir\src
+
 build CMakeFiles/clientSaveData.dir/src/main.cpp.obj: CXX_COMPILER__clientSaveData_Debug C$:/Projects/SaveData/clientSaveData/clientSaveData/src/main.cpp || cmake_object_order_depends_target_clientSaveData
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_NETWORK_LIB -DQT_TESTCASE_BUILDDIR=\"C:/Projects/SaveData/clientSaveData/build-clientSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug\" -DQT_TESTCASE_SOURCEDIR=\"C:/Projects/SaveData/clientSaveData/clientSaveData\" -DQT_TESTLIB_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0601 -D_WIN64
   DEP_FILE = CMakeFiles\clientSaveData.dir\src\main.cpp.obj.d
@@ -81,7 +89,7 @@ build CMakeFiles/clientSaveData.dir/src/main.cpp.obj: CXX_COMPILER__clientSaveDa
 #############################################
 # Link the executable clientSaveData.exe
 
-build clientSaveData.exe: CXX_EXECUTABLE_LINKER__clientSaveData_Debug CMakeFiles/clientSaveData.dir/clientSaveData_autogen/mocs_compilation.cpp.obj CMakeFiles/clientSaveData.dir/src/ClientData.cpp.obj CMakeFiles/clientSaveData.dir/src/main.cpp.obj | C$:/Qt6/6.2.0/mingw81_64/lib/libQt6Test.a C$:/Qt6/6.2.0/mingw81_64/lib/libQt6Network.a C$:/Qt6/6.2.0/mingw81_64/lib/libQt6Core.a || clientSaveData_autogen clientSaveData_autogen_timestamp_deps
+build clientSaveData.exe: CXX_EXECUTABLE_LINKER__clientSaveData_Debug CMakeFiles/clientSaveData.dir/clientSaveData_autogen/mocs_compilation.cpp.obj CMakeFiles/clientSaveData.dir/src/ClientData.cpp.obj CMakeFiles/clientSaveData.dir/src/Commands.cpp.obj CMakeFiles/clientSaveData.dir/src/main.cpp.obj | C$:/Qt6/6.2.0/mingw81_64/lib/libQt6Test.a C$:/Qt6/6.2.0/mingw81_64/lib/libQt6Network.a C$:/Qt6/6.2.0/mingw81_64/lib/libQt6Core.a || clientSaveData_autogen clientSaveData_autogen_timestamp_deps
   FLAGS = -g
   LINK_LIBRARIES = C:/Qt6/6.2.0/mingw81_64/lib/libQt6Test.a  C:/Qt6/6.2.0/mingw81_64/lib/libQt6Network.a  C:/Qt6/6.2.0/mingw81_64/lib/libQt6Core.a  -lmpr  -luserenv  -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\clientSaveData.dir
@@ -141,7 +149,7 @@ build clientSaveData_autogen/timestamp clientSaveData_autogen/mocs_compilation.c
 #############################################
 # Phony custom command for CMakeFiles\clientSaveData_autogen_timestamp_deps
 
-build CMakeFiles/clientSaveData_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/clientSaveData_autogen_timestamp_deps: phony C$:/Qt6/6.2.0/mingw81_64/bin/Qt6Core.dll C$:/Qt6/6.2.0/mingw81_64/./bin/moc.exe C$:/Qt6/6.2.0/mingw81_64/bin/Qt6Test.dll C$:/Qt6/6.2.0/mingw81_64/bin/Qt6Network.dll
+build CMakeFiles/clientSaveData_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/clientSaveData_autogen_timestamp_deps: phony C$:/Qt6/6.2.0/mingw81_64/./bin/moc.exe C$:/Qt6/6.2.0/mingw81_64/bin/Qt6Test.dll C$:/Qt6/6.2.0/mingw81_64/bin/Qt6Network.dll C$:/Qt6/6.2.0/mingw81_64/bin/Qt6Core.dll
 
 
 #############################################

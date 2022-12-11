@@ -180,6 +180,12 @@
 			"Mu",
 			"6YEA5652QU/moc_ServerData.cpp",
 			null
+		],
+		[
+			"C:/Projects/SaveData/serverSaveData/serverSaveData/include/StreamTable.h",
+			"Mu",
+			"6YEA5652QU/moc_StreamTable.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
