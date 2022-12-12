@@ -1,0 +1,12 @@
+{
+    "columns": [
+        "omega",
+        "size",
+        "weight"
+    ],
+    "types": {
+        "omega": "int",
+        "size": "int",
+        "weight": "int"
+    }
+}

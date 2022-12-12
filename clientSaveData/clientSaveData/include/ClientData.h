@@ -31,10 +31,12 @@ public:
 //commands, типа обработчик команд, общая функция и сами команды
 public:
     enum Command {CREATE_TABLE = 1, SHOW_TABLE = 2, VIEWS_STRUCT = 3, INSERT_DATA = 4, READ_DATA = 5, CHANGE_DATA = 6, DELETE_DATA = 7};
+    enum SIZE_TYPE {INT_SIZE = 11, STRING_SIZE = 40, BOOL_SIZE = 5};
     QByteArray createTable();
     QByteArray viewsTable();
     QByteArray insertDataInTable();
     QByteArray viewsStruct();
+    QByteArray readData();
 
 
 private:

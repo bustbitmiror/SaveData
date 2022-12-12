@@ -215,6 +215,22 @@ void ClientData::slotConnectedAndTransfer(){
             }
 
             case READ_DATA:{
+                QByteArray command = readData();
+                std::system("cls");
+               // *out << "The request has been sent." << Qt::endl << Qt::flush;
+                sendMessageToServer(command);       // отправили на сервер
+
+                // ждем ответа от сервера
+                m_tcpSocket->waitForReadyRead();
+                QJsonDocument response = QJsonDocument::fromJson(*bufferResponse);
+                bufferResponse->clear();
+                QJsonObject proc = response.object();
+
+                if (proc.value("type").toString() == "message"){
+                    *out << proc.value("response").toString() << Qt::flush;
+                }
+                *out << "\n\nPlease press any button...\n" << Qt::flush;
+                std::cin.get();
                 break;
             }
 

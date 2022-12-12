@@ -194,10 +194,22 @@ QByteArray ClientData::insertDataInTable(){
         columns.append(column.at(i));
 
         if (types[column.at(i)].toString() == "int" || types[column.at(i)].toString() == "double"){
+            if (valuesColumns.at(i).size() > INT_SIZE){
+                *out << "The int/double type must be no more than 11 characters!\n" << Qt::flush;
+                return QByteArray();
+            }
             values.append(valuesColumns.at(i).toDouble());
         } else if (types[column.at(i)].toString() == "string"){
+            if (valuesColumns.at(i).size() > STRING_SIZE){
+                *out << "The string type must be no more than 40 characters!\n" << Qt::flush;
+                return QByteArray();
+            }
             values.append(valuesColumns.at(i));
         } else if (types[column.at(i)].toString() == "bool"){
+            if (valuesColumns.at(i).size() > BOOL_SIZE){
+                *out << "The bool type must be no more than 5 characters!\n" << Qt::flush;
+                return QByteArray();
+            }
             values.append(valuesColumns.at(i));
         }
 
@@ -229,3 +241,35 @@ QByteArray ClientData::viewsStruct(){
 
     return jsonRequest.toJson();
 }
+
+QByteArray ClientData::readData(){
+    std::system("cls");
+    QJsonObject objRead;              // создаем объект QJson запроса
+    objRead.insert("type", "SELECT");  //  тип запроса SELECT
+
+    QString nameTable;
+    *out << "Table name: " << Qt::flush;
+    nameTable = in->readLine();   // читаем название таблицы
+    in->flush();
+
+    objRead.insert("name", nameTable);  // добавляем его в json запрос
+
+    *out << "Column names (separated by a space): " << Qt::flush;
+
+    QStringList column = (in->readLine()).split(u' ', Qt::SkipEmptyParts);
+    in->flush();
+
+    QJsonArray columns;
+
+    for (int i = 0; i < column.size(); i++){  // добавляем в массивы QJson запроса
+        columns.append(column.at(i));
+    }
+
+    objRead.insert("columns", columns);
+
+    QJsonDocument jsonRequest(objRead);
+
+
+    return jsonRequest.toJson();
+}
+

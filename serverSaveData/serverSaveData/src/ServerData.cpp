@@ -14,6 +14,7 @@
 #include <sstream>
 #include <string>
 #include "include/StreamTable.h"
+#include <QDateTime>
 
 
 ServerData::ServerData(int port) : m_NextBlockSize(0)
@@ -50,137 +51,6 @@ void ServerData::slotNewConnection(){
     connect(pClientSocket, SIGNAL(readyRead()), this, SLOT(slotReadClient()));
 
     *conOutput << QTime::currentTime().toString() << " New Connection! Client: " << pClientSocket->localAddress().toString() << '\n' << Qt::flush;
-
-    QString tableName = "lol";
-    if (!dir->exists(tableName)){
-        //откидываем сообщении о несуществовании таблицы
-    }
-
-    QJsonArray col = {"id", "name"};
-
-    dir->cd(tableName);
-
-    QFile typesFile(dir->absolutePath() + "/types.entry");
-    if(!typesFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-        *conOutput << "File not open!" << Qt::endl << Qt::flush;
-    }
-    QJsonDocument jsonTypes = QJsonDocument::fromJson(typesFile.readAll());
-    typesFile.close();
-    QJsonObject objJson = jsonTypes.object();
-    QJsonArray columnsFromTypes = objJson.value("columns").toArray();
-    QJsonObject objTypesFromTypes = objJson.value("types").toObject();
-
-
-     //рисуем таблицу
-
-
-
-    QStringList listEntry = dir->entryList(QDir::Files);
-    QString outputTable;        // таблица для вывода, которую отправим пользователю
-    //QTextStream out(&outputTable);
-    //StreamTable st(out);
-    std::ostringstream stream;
-    StreamTable st(stream);
-
-    if(col.size() == 1 && col.at(0).toString() == "*"){
-        st.SetCols(columnsFromTypes.size(), 15);
-    } else {
-        st.SetCols(col.size(), 15);
-    }
-    //st.SetCols(2, 15);
-    st.MakeBorderExt(true);
-    st.SetDelimRow(true, '-');
-    st.SetDelimCol(true, '|');
-    //st.SetDelimCol(false);
-    //st.SetDelimRow(false);
-
-//    st << "id" << "type";
-//    st << 0 << "test";
-
-
-    if (col.size() == 1 && col.at(0).toString() == "*"){
-        for (int i = 0; i < columnsFromTypes.size(); i++){
-
-            st << columnsFromTypes[i].toString().toStdString();
-
-        }
-    } else {
-        for(int i = 0; i < col.size(); i++){
-            if(columnsFromTypes.contains(col.at(i))){
-                st << col.at(i).toString().toStdString();
-            }
-        }
-    }
-
-
-
-
-
-    foreach (QString entry, listEntry){
-        if(entry == "types.entry"){
-            continue;
-        }
-
-        // тут нужна проверка на readLock
-        QFile entryFile(dir->absolutePath() + "/" + entry);
-        if(!entryFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-            *conOutput << "File not open!" << Qt::endl << Qt::flush;
-        }
-
-        QJsonDocument jsonFile = QJsonDocument::fromJson(entryFile.readAll());
-        entryFile.close();
-        QJsonObject objJson = jsonFile.object();
-
-
-
-
-
-        if (col.size() == 1 && col.at(0).toString() == "*"){
-
-            for (int i = 0; i < columnsFromTypes.size(); i++){
-                if (objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "int" || objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "double"){
-
-                    st << objJson.value(columnsFromTypes.at(i).toString()).toDouble();
-                    //*conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toDouble() << " " << Qt::flush;
-                } else if (objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "bool") {
-                    st << objJson.value(columnsFromTypes.at(i).toString()).toBool();
-                    //*conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toBool() << " " << Qt::flush;
-                } else if (objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "string") {
-                    st << objJson.value(columnsFromTypes.at(i).toString()).toString().toStdString();
-                    //*conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toString() << " " << Qt::flush;
-                }
-
-            }
-
-        } else {
-
-            for(int i = 0; i < col.size(); i++){
-
-                if(columnsFromTypes.contains(col.at(i))){
-
-                    if (objTypesFromTypes.value(col.at(i).toString()) == "int" || objTypesFromTypes.value(col.at(i).toString()) == "double"){
-                        st << objJson.value(col.at(i).toString()).toDouble();
-                        //*conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toDouble() << " " << Qt::flush;
-                    } else if (objTypesFromTypes.value(col.at(i).toString()) == "bool") {
-                        st << objJson.value(col.at(i).toString()).toBool();
-                        //*conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toBool() << " " << Qt::flush;
-                    } else if (objTypesFromTypes.value(col.at(i).toString()) == "string") {
-                        st << objJson.value(col.at(i).toString()).toString().toStdString();
-                        //*conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toString() << " " << Qt::flush;
-                    }
-
-                }
-            }
-
-
-            //*conOutput << Qt::endl << Qt::flush;
-        }
-
-    }
-
-    outputTable = QString::fromStdString(stream.str());
-    dir->cdUp();
-    *conOutput << outputTable << Qt::flush;
 
 }
 
@@ -331,9 +201,9 @@ void ServerData::slotReadClient(){
 
             QJsonDocument entryJson(entry);  // json запись
 
-            int countFile = dir->entryList(QDir::Files).size();
-            QString nameEntryFile = tableName + QString::number(countFile-1) + ".entry";
-            //QString nameEntryFile = tableName + "_" + QTime::currentTime().toString("")
+            //int countFile = dir->entryList(QDir::Files).size();
+            //QString nameEntryFile = tableName + QString::number(countFile-1) + ".entry";
+            QString nameEntryFile = tableName + "_" + QDateTime::currentDateTime().toString("ddMMyyyy_HHmmss") + ".entry";
             //*conOutput << nameEntryFile << Qt::endl << Qt::flush;
             QFile entryF(dir->absolutePath() + "/" + nameEntryFile);
             if(!entryF.open(QIODevice::WriteOnly)){
@@ -370,6 +240,10 @@ void ServerData::slotReadClient(){
             QString tableName = proc.value("name").toString();
             if (!dir->exists(tableName)){
                 //откидываем сообщении о несуществовании таблицы
+                QByteArray resp = jsonResponse("The " + tableName + " table does not exist!");
+                sendToClient(pClientSocket, resp);
+                m_NextBlockSize = 0;
+                break;
             }
 
             QJsonArray col = proc.value("columns").toArray();
@@ -386,14 +260,80 @@ void ServerData::slotReadClient(){
             QJsonArray columnsFromTypes = objJson.value("columns").toArray();
             QJsonObject objTypesFromTypes = objJson.value("types").toObject();
 
-            // рисуем таблицу
+
+             //рисуем таблицу
 
 
 
             QStringList listEntry = dir->entryList(QDir::Files);
-            //QString outputTable;        // таблица для вывода, которую отправим пользователю
-            //QTextStream out(stdout);
+            QString outputTable;        // таблица для вывода, которую отправим пользователю
+            //QTextStream out(&outputTable);
             //StreamTable st(out);
+            std::ostringstream stream;
+            StreamTable st(stream);
+
+            if(col.size() == 1 && col.at(0).toString() == "*"){
+                //st.SetCols(columnsFromTypes.size(), 15);
+                for (int i = 0; i < columnsFromTypes.size(); i++){
+                    if (objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "int" || objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "double"){
+
+                        st.AddCol(11, true);
+                        //*conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toDouble() << " " << Qt::flush;
+                    } else if (objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "bool") {
+                        st.AddCol(5, true);
+                        //*conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toBool() << " " << Qt::flush;
+                    } else if (objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "string") {
+                        st.AddCol(40, true);
+                        //*conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toString() << " " << Qt::flush;
+                    }
+
+                }
+
+            } else {
+                for(int i = 0; i < col.size(); i++){
+
+                    if(columnsFromTypes.contains(col.at(i))){
+
+                        if (objTypesFromTypes.value(col.at(i).toString()) == "int" || objTypesFromTypes.value(col.at(i).toString()) == "double"){
+                            st.AddCol(11, true);
+                            //*conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toDouble() << " " << Qt::flush;
+                        } else if (objTypesFromTypes.value(col.at(i).toString()) == "bool") {
+                            st.AddCol(5, true);
+                            //*conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toBool() << " " << Qt::flush;
+                        } else if (objTypesFromTypes.value(col.at(i).toString()) == "string") {
+                            st.AddCol(40, true);
+                            //*conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toString() << " " << Qt::flush;
+                        }
+
+                    }
+                }
+            }
+            //st.SetCols(2, 15);
+            st.MakeBorderExt(true);
+            st.SetDelimRow(true, '-');
+            st.SetDelimCol(true, '|');
+            //st.SetDelimCol(false);
+            //st.SetDelimRow(false);
+
+
+            if (col.size() == 1 && col.at(0).toString() == "*"){
+                for (int i = 0; i < columnsFromTypes.size(); i++){
+
+                    st << columnsFromTypes[i].toString().toStdString();
+
+                }
+            } else {
+                for(int i = 0; i < col.size(); i++){
+                    if(columnsFromTypes.contains(col.at(i))){
+                        st << col.at(i).toString().toStdString();
+                    }
+                }
+            }
+
+
+
+
+
             foreach (QString entry, listEntry){
                 if(entry == "types.entry"){
                     continue;
@@ -408,39 +348,62 @@ void ServerData::slotReadClient(){
                 QJsonDocument jsonFile = QJsonDocument::fromJson(entryFile.readAll());
                 entryFile.close();
                 QJsonObject objJson = jsonFile.object();
+
+
+
+
+
                 if (col.size() == 1 && col.at(0).toString() == "*"){
-
-
-
 
                     for (int i = 0; i < columnsFromTypes.size(); i++){
                         if (objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "int" || objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "double"){
-                            *conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toDouble() << " " << Qt::flush;
+
+                            st << objJson.value(columnsFromTypes.at(i).toString()).toDouble();
+                            //*conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toDouble() << " " << Qt::flush;
                         } else if (objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "bool") {
-                            *conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toBool() << " " << Qt::flush;
+                            st << objJson.value(columnsFromTypes.at(i).toString()).toBool();
+                            //*conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toBool() << " " << Qt::flush;
                         } else if (objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "string") {
-                            *conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toString() << " " << Qt::flush;
+                            st << objJson.value(columnsFromTypes.at(i).toString()).toString().toStdString();
+                            //*conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toString() << " " << Qt::flush;
                         }
 
                     }
-                    *conOutput << Qt::endl << Qt::flush;
+
                 } else {
+
                     for(int i = 0; i < col.size(); i++){
+
                         if(columnsFromTypes.contains(col.at(i))){
 
                             if (objTypesFromTypes.value(col.at(i).toString()) == "int" || objTypesFromTypes.value(col.at(i).toString()) == "double"){
-                                *conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toDouble() << " " << Qt::flush;
+                                st << objJson.value(col.at(i).toString()).toDouble();
+                                //*conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toDouble() << " " << Qt::flush;
                             } else if (objTypesFromTypes.value(col.at(i).toString()) == "bool") {
-                                *conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toBool() << " " << Qt::flush;
+                                st << objJson.value(col.at(i).toString()).toBool();
+                                //*conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toBool() << " " << Qt::flush;
                             } else if (objTypesFromTypes.value(col.at(i).toString()) == "string") {
-                                *conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toString() << " " << Qt::flush;
+                                st << objJson.value(col.at(i).toString()).toString().toStdString();
+                                //*conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toString() << " " << Qt::flush;
                             }
 
                         }
                     }
-                    *conOutput << Qt::endl << Qt::flush;
+
+
+                    //*conOutput << Qt::endl << Qt::flush;
                 }
+
             }
+
+            outputTable = QString::fromStdString(stream.str());
+            dir->cdUp();
+            QByteArray resp = jsonResponse(outputTable);
+            sendToClient(pClientSocket, resp); // отправляем структуру
+
+            //*conOutput << outputTable << Qt::flush;
+
+
         } else if (proc.value("type").toString() == "VIEWSSTRUCT"){ // VIEWSSTRUCT
 
             QString tableName = proc.value("name").toString();
@@ -483,11 +446,6 @@ void ServerData::slotReadClient(){
             }
 
 
-//            QJsonObject respObj;
-//            respObj.insert("type", "message");
-//            respObj.insert("response", retOutput);
-//            QJsonDocument responseJson(respObj);
-//            QByteArray resp = responseJson.toJson();
             QByteArray resp = jsonResponse(retOutput);
             sendToClient(pClientSocket, resp); // отправляем структуру
             dir->cdUp();
