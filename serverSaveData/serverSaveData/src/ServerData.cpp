@@ -579,6 +579,146 @@ void ServerData::slotReadClient(){
             dir->cdUp();
 
 
+        } else if (proc.value("type").toString() == "CHANGE"){
+            QString tableName = proc.value("name").toString();
+
+            if (!dir->exists(tableName)){
+                //откидываем сообщении о несуществовании таблицы
+                QByteArray responseMessage = jsonResponse("The " + tableName + " table does not exist!");
+                sendToClient(pClientSocket, responseMessage);
+                m_NextBlockSize = 0;
+                break;
+            }
+
+            int countChangeFile = 0;    // счетчик измененных файлов
+            QJsonObject objWhere = proc.value("where").toObject();
+            QJsonObject objSet = proc.value("set").toObject();
+            QJsonArray colWhere = proc.value("columnsWhere").toArray();
+            QJsonArray colSet = proc.value("columnsSet").toArray();
+            dir->cd(tableName);
+
+            QFile typesFile(dir->absolutePath() + "/types.entry");
+            if(!typesFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+                // ошибка
+                *conOutput << "File not open!" << Qt::endl << Qt::flush;
+            }
+            QJsonDocument jsonTypes = QJsonDocument::fromJson(typesFile.readAll());
+            typesFile.close();
+            QJsonObject objJson = jsonTypes.object();
+            QJsonArray columnsFromTypes = objJson.value("columns").toArray();
+            QJsonObject objTypesFromTypes = objJson.value("types").toObject();
+
+            QStringList listEntry = dir->entryList(QDir::Files);
+            foreach (QString entry, listEntry){
+                if(entry == "types.entry"){
+                    continue;
+                }
+
+                // тут нужна проверка на readLock
+                QFile entryFile(dir->absolutePath() + "/" + entry);
+                if(!entryFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+                    *conOutput << "File not open!" << Qt::endl << Qt::flush;
+                }
+
+                QJsonDocument jsonFile = QJsonDocument::fromJson(entryFile.readAll());
+                entryFile.close();
+                QJsonObject objJson = jsonFile.object();
+
+                bool fullMatch = false;
+                for(int i = 0; i < colWhere.size(); i++){
+                    QString colStr = colWhere.at(i).toString();
+                    QString typeCol = objTypesFromTypes.value(colWhere.at(i).toString()).toString();
+
+                    if (typeCol == "int" || typeCol == "double"){
+                        double valueCol = objJson[colStr].toDouble();
+                        double valueWhereObj = objWhere[colStr].toDouble();
+
+                        if(valueCol == valueWhereObj){
+                            fullMatch = true;
+                        } else {
+                            fullMatch = false;
+                            break;
+                        }
+
+                    } else if (typeCol == "bool") {
+                        bool valueCol = objJson[colStr].toBool();
+                        bool valueWhereObj = objWhere[colStr].toBool();
+
+                        if(valueCol == valueWhereObj){
+                            fullMatch = true;
+                        } else {
+                            fullMatch = false;
+                            break;
+                        }
+
+                    } else if (typeCol == "string") {
+                        QString valueCol = objJson[colStr].toString();
+                        QString valueWhereObj = objWhere[colStr].toString();
+
+                        if(valueCol == valueWhereObj){
+                            fullMatch = true;
+                        } else {
+                            fullMatch = false;
+                            break;
+                        }
+                    }
+
+                }
+
+                if(fullMatch){
+                    for(int i = 0; i < colSet.size(); i++){
+                        QString colStr = colSet.at(i).toString();
+                        QString typeCol = objTypesFromTypes.value(colSet.at(i).toString()).toString();
+
+                        if (typeCol == "int" || typeCol == "double"){
+                            //double valueCol = objJson[colStr].toDouble();
+                            double valueSetObj = objSet[colStr].toDouble();
+
+                            objJson.erase(objJson.find(colStr)); // удаление старового значения
+                            objJson.insert(colStr, valueSetObj); // добавление нового
+
+
+
+                        } else if (typeCol == "bool") {
+                            //bool valueCol = objJson[colStr].toBool();
+                            bool valueSetObj = objSet[colStr].toBool();
+
+                            objJson.erase(objJson.find(colStr)); // удаление старового значения
+                            objJson.insert(colStr, valueSetObj); // добавление нового
+
+                        } else if (typeCol == "string") {
+                            //QString valueCol = objJson[colStr].toString();
+                            QString valueSetObj = objSet[colStr].toString();
+
+                            objJson.erase(objJson.find(colStr)); // удаление старового значения
+                            objJson.insert(colStr, valueSetObj); // добавление нового
+                        }
+
+                    }
+
+                    if(!entryFile.open(QIODevice::WriteOnly)){
+                        *conOutput << "File not open!" << Qt::endl << Qt::flush;
+                    }
+
+                    jsonFile.setObject(objJson);
+                    entryFile.write(jsonFile.toJson());
+                    entryFile.close();
+
+                    countChangeFile++;
+
+                }
+
+            }
+
+            QString outputMessage = QString::number(countChangeFile) + " files changed";
+
+
+            QByteArray resp = jsonResponse(outputMessage);
+            sendToClient(pClientSocket, resp); // отправляем структуру
+            dir->cdUp();
+
+
+
         }
 
         //QString strMessage = QTime::currentTime().toString() + " " + str + '\n';

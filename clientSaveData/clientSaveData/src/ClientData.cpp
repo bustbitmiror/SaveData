@@ -341,7 +341,7 @@ void ClientData::Menu(){
     *out << "4. Inserting data into a table (insert into ... values ... )\n";
     *out << "5. Reading data from a table (select ... from ... where ... )\n";
     *out << "6. Changing the data in the table (update ... set ... where ...)\n";
-    *out << "7. Deleting tables/rows/columns (delete ... / delete from ... where ... )\n\n";
+    *out << "7. Deleting rows (delete ... / delete from ... where ... )\n\n";
     *out << "For reference, enter the command 'help'.\n";
     *out << "To exit, enter the command 'exit'.\n";
     *out << "command > ";

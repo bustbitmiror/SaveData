@@ -414,6 +414,238 @@ QByteArray ClientData::deleteData(){
 }
 
 QByteArray ClientData::changeData(){
+    std::system("cls");
+    QJsonObject objChange;              // создаем объект QJson запроса
+    objChange.insert("type", "CHANGE");  //  тип запроса CHANGE
 
+    QString nameTable;
+    *out << "Table name: " << Qt::flush;
+    nameTable = in->readLine();   // читаем название таблицы
+    in->flush();
+
+
+    // ----------Information request-----------
+    QJsonObject objInfo;
+    objInfo.insert("type", "INFORMATION");
+    objInfo.insert("name", nameTable);
+    QJsonDocument jsonInfo(objInfo);
+    QByteArray infoMessage = jsonInfo.toJson();
+    sendMessageToServer(infoMessage);
+    m_tcpSocket->waitForReadyRead();
+    jsonInfo = QJsonDocument::fromJson(*bufferResponse);
+    bufferResponse->clear();
+    objInfo = jsonInfo.object();
+    if (objInfo.value("type").toString() == "information"){
+        // продолжаем...
+
+    } else if (objInfo.value("type").toString() == "message"){
+        *out << objInfo.value("response").toString() << Qt::flush;
+        return QByteArray();
+    }
+    // ---------------------------------------
+
+    objChange.insert("name", nameTable);  // добавляем название в объект запроса
+
+
+
+    QJsonArray col = objInfo.value("columns").toArray();
+    QJsonObject types = objInfo.value("types").toObject();
+
+    *out << "Existing columns of the " << nameTable << " table: ";
+    for (int i = 0; i < col.size(); i++){
+        *out << col.at(i).toString() << " ";
+    }
+    *out << '\n';
+    *out << "Types columns:\n";
+    for (int i = 0; i < col.size(); i++){
+        *out << "\t" << col.at(i).toString() << " : " << types[col.at(i).toString()].toString() << '\n';
+    }
+    *out << Qt::flush;
+
+
+    QStringList columnSet;
+    QStringList valuesColumnsSet;
+    // for set
+    bool matchSizeSet = false;
+    while(matchSizeSet != true){
+        *out << "Column names to change (separated by a space) (set): " << Qt::flush;
+
+        // читаем названия столбцов
+        columnSet = (in->readLine()).split(u' ', Qt::SkipEmptyParts);
+        in->flush();
+
+
+        // проверка на соответствие с существующей таблицей
+        bool match = true;
+        for(int i = 0; i < columnSet.size(); i++){
+            if(!col.contains(columnSet.at(i))){
+                *out << "Unknown column\n" << Qt::flush;
+                match = false;
+                break;
+            }
+        }
+
+        if(!match){
+            continue;
+        }
+
+        for (int i = 0; i < columnSet.size(); i++){
+            if (columnSet.count(columnSet.at(i)) > 1){
+                match = false;
+                *out << "The column met more than 1 time! You can't do that.\n" << Qt::flush;
+                break;
+            }
+        }
+
+        if(!match){
+            continue;
+        }
+
+        //QStringList valuesColumns;
+        *out << "The values of these columns (separated by a space): " << Qt::flush;
+
+        valuesColumnsSet = (in->readLine()).split(u' ', Qt::SkipEmptyParts); // читаем значения наших колонок
+        in->flush();
+
+        if(valuesColumnsSet.size() != columnSet.size()){
+            *out << "Unequal number of columns and values!\n" << Qt::flush;
+            matchSizeSet = false;
+        } else {
+            matchSizeSet = true;
+        }
+    }
+
+    QStringList columnWhere;
+    QStringList valueWhere;
+
+    // for where
+    bool matchSizeWhere = false;
+    while(matchSizeWhere != true){
+        *out << "Column names with existing values (separated by a space) (where): " << Qt::flush;
+
+        // читаем названия столбцов
+        columnWhere = (in->readLine()).split(u' ', Qt::SkipEmptyParts);
+        in->flush();
+
+
+        // проверка на соответствие с существующей таблицей
+        bool match = true;
+        for(int i = 0; i < columnWhere.size(); i++){
+            if(!col.contains(columnWhere.at(i))){
+                *out << "Unknown column\n" << Qt::flush;
+                match = false;
+                break;
+            }
+        }
+
+        if(!match){
+            continue;
+        }
+
+        for (int i = 0; i < columnWhere.size(); i++){
+            if (columnWhere.count(columnWhere.at(i)) > 1){
+                match = false;
+                *out << "The column met more than 1 time! You can't do that.\n" << Qt::flush;
+                break;
+            }
+        }
+
+        if(!match){
+            continue;
+        }
+
+        //QStringList valuesColumns;
+        *out << "The values of these columns (separated by a space): " << Qt::flush;
+
+        valueWhere = (in->readLine()).split(u' ', Qt::SkipEmptyParts); // читаем значения наших колонок
+        in->flush();
+
+        if(valueWhere.size() != columnWhere.size()){
+            *out << "Unequal number of columns and values!\n" << Qt::flush;
+            matchSizeWhere = false;
+        } else {
+            matchSizeWhere = true;
+        }
+    }
+
+
+
+
+
+    QJsonObject objWhere;  // для хранения ключ значений поиска
+    QJsonObject objSet;
+    QJsonArray columnsSet;
+    QJsonArray columnsWhere;
+
+    //set
+    for(int i = 0; i < columnSet.size(); i++){
+        columnsSet.append(columnSet.at(i));
+        if (types[columnSet.at(i)].toString() == "int" || types[columnSet.at(i)].toString() == "double"){
+
+//            if(objWhere.constFind(column.at(i)) == objWhere.constEnd()){
+//                columns.append(column.at(i));
+//                objWhere.insert(column.at(i), valuesColumns.at(i).toDouble());
+//            }
+            objSet.insert(columnSet.at(i), valuesColumnsSet.at(i).toDouble());
+
+        } else if (types[columnSet.at(i)].toString() == "string"){
+
+//            if(objWhere.constFind(column.at(i)) == objWhere.constEnd()){
+//                columns.append(column.at(i));
+//                objWhere.insert(column.at(i), valuesColumns.at(i));
+//            }
+            objSet.insert(columnSet.at(i), valuesColumnsSet.at(i));
+        } else if (types[columnSet.at(i)].toString() == "bool"){
+
+//            if(objWhere.constFind(column.at(i)) == objWhere.constEnd()){
+//                columns.append(column.at(i));
+//                objWhere.insert(column.at(i), valuesColumns.at(i));
+//            }
+            objSet.insert(columnSet.at(i), valuesColumnsSet.at(i));
+
+        }
+    }
+
+    // where
+    for(int i = 0; i < columnWhere.size(); i++){
+        columnsWhere.append(columnWhere.at(i));
+        if (types[columnWhere.at(i)].toString() == "int" || types[columnWhere.at(i)].toString() == "double"){
+
+//            if(objWhere.constFind(column.at(i)) == objWhere.constEnd()){
+//                columns.append(column.at(i));
+//                objWhere.insert(column.at(i), valuesColumns.at(i).toDouble());
+//            }
+            objWhere.insert(columnWhere.at(i), valueWhere.at(i).toDouble());
+
+        } else if (types[columnWhere.at(i)].toString() == "string"){
+
+//            if(objWhere.constFind(column.at(i)) == objWhere.constEnd()){
+//                columns.append(column.at(i));
+//                objWhere.insert(column.at(i), valuesColumns.at(i));
+//            }
+            objWhere.insert(columnWhere.at(i), valueWhere.at(i));
+        } else if (types[columnWhere.at(i)].toString() == "bool"){
+
+//            if(objWhere.constFind(column.at(i)) == objWhere.constEnd()){
+//                columns.append(column.at(i));
+//                objWhere.insert(column.at(i), valuesColumns.at(i));
+//            }
+            objWhere.insert(columnWhere.at(i), valueWhere.at(i));
+
+        }
+    }
+
+
+
+
+
+    objChange.insert("columnsSet", columnsSet);
+    objChange.insert("columnsWhere", columnsWhere);
+    objChange.insert("set", objSet);
+    objChange.insert("where", objWhere);
+    QJsonDocument jsonRequest(objChange);
+
+
+    return jsonRequest.toJson();
 
 }
