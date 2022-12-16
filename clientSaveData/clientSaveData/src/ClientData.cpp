@@ -235,10 +235,55 @@ void ClientData::slotConnectedAndTransfer(){
             }
 
             case CHANGE_DATA:{
+                QByteArray command = changeData();
+
+                if (!command.isNull()){
+                    std::system("cls");
+                   // *out << "The request has been sent." << Qt::endl << Qt::flush;
+                    sendMessageToServer(command);       // отправили на сервер
+
+                    // ждем ответа от сервера
+                    m_tcpSocket->waitForReadyRead();
+                    QJsonDocument response = QJsonDocument::fromJson(*bufferResponse);
+                    bufferResponse->clear();
+                    QJsonObject proc = response.object();
+
+                    if (proc.value("type").toString() == "message"){
+                        *out << proc.value("response").toString() << Qt::flush;
+                    }
+                    *out << "\n\nPlease press any button...\n" << Qt::flush;
+                    std::cin.get();
+                } else if (command.isNull()){
+                    *out << "\n\nPlease press any button...\n" << Qt::flush;
+                    std::cin.get();
+                }
                 break;
             }
 
             case DELETE_DATA:{
+                QByteArray command = deleteData();
+
+                if (!command.isNull()){
+                    std::system("cls");
+                   // *out << "The request has been sent." << Qt::endl << Qt::flush;
+                    sendMessageToServer(command);       // отправили на сервер
+
+                    // ждем ответа от сервера
+                    m_tcpSocket->waitForReadyRead();
+                    QJsonDocument response = QJsonDocument::fromJson(*bufferResponse);
+                    bufferResponse->clear();
+                    QJsonObject proc = response.object();
+
+                    if (proc.value("type").toString() == "message"){
+                        *out << proc.value("response").toString() << Qt::flush;
+                    }
+                    *out << "\n\nPlease press any button...\n" << Qt::flush;
+                    std::cin.get();
+                } else if (command.isNull()){
+                    *out << "\n\nPlease press any button...\n" << Qt::flush;
+                    std::cin.get();
+                }
+
                 break;
             }
 

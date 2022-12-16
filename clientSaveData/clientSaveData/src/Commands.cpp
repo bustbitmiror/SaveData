@@ -273,3 +273,147 @@ QByteArray ClientData::readData(){
     return jsonRequest.toJson();
 }
 
+
+QByteArray ClientData::deleteData(){
+    std::system("cls");
+    QJsonObject objDelete;              // создаем объект QJson запроса
+    objDelete.insert("type", "DELETE");  //  тип запроса DELETE
+
+    QString nameTable;
+    *out << "Table name: " << Qt::flush;
+    nameTable = in->readLine();   // читаем название таблицы
+    in->flush();
+
+
+    // ----------Information request-----------
+    QJsonObject objInfo;
+    objInfo.insert("type", "INFORMATION");
+    objInfo.insert("name", nameTable);
+    QJsonDocument jsonInfo(objInfo);
+    QByteArray infoMessage = jsonInfo.toJson();
+    sendMessageToServer(infoMessage);
+    m_tcpSocket->waitForReadyRead();
+    jsonInfo = QJsonDocument::fromJson(*bufferResponse);
+    bufferResponse->clear();
+    objInfo = jsonInfo.object();
+    if (objInfo.value("type").toString() == "information"){
+        // продолжаем...
+
+    } else if (objInfo.value("type").toString() == "message"){
+        *out << objInfo.value("response").toString() << Qt::flush;
+        return QByteArray();
+    }
+    // ---------------------------------------
+
+    objDelete.insert("name", nameTable);  // добавляем название в объект запроса
+
+    QStringList column;
+    QStringList valuesColumns;
+
+    QJsonArray col = objInfo.value("columns").toArray();
+    QJsonObject types = objInfo.value("types").toObject();
+
+    *out << "Existing columns of the " << nameTable << " table: ";
+    for (int i = 0; i < col.size(); i++){
+        *out << col.at(i).toString() << " ";
+    }
+    *out << '\n';
+    *out << "Types columns:\n";
+    for (int i = 0; i < col.size(); i++){
+        *out << "\t" << col.at(i).toString() << " : " << types[col.at(i).toString()].toString() << '\n';
+    }
+    *out << Qt::flush;
+
+    bool matchSize = false;
+    while(matchSize != true){
+        *out << "Column names for deleting a record/entries (separated by a space): " << Qt::flush;
+
+        // читаем названия столбцов
+        column = (in->readLine()).split(u' ', Qt::SkipEmptyParts);
+        in->flush();
+
+
+        // проверка на соответствие с существующей таблицей
+        bool match = true;
+        for(int i = 0; i < column.size(); i++){
+            if(!col.contains(column.at(i))){
+                *out << "Unknown column\n" << Qt::flush;
+                match = false;
+                break;
+            }
+        }
+
+        if(!match){
+            continue;
+        }
+
+        for (int i = 0; i < column.size(); i++){
+            if (column.count(column.at(i)) > 1){
+                match = false;
+                *out << "The column met more than 1 time! You can't do that.\n" << Qt::flush;
+                break;
+            }
+        }
+
+        if(!match){
+            continue;
+        }
+
+        //QStringList valuesColumns;
+        *out << "The values of these columns (separated by a space): " << Qt::flush;
+
+        valuesColumns = (in->readLine()).split(u' ', Qt::SkipEmptyParts); // читаем значения наших колонок
+        in->flush();
+
+        if(valuesColumns.size() != column.size()){
+            *out << "Unequal number of columns and values!\n" << Qt::flush;
+            matchSize = false;
+        } else {
+            matchSize = true;
+        }
+    }
+
+    QJsonObject objWhere;  // для хранения ключ значений поиска
+    QJsonArray columns;
+
+    for(int i = 0; i < column.size(); i++){
+        columns.append(column.at(i));
+        if (types[column.at(i)].toString() == "int" || types[column.at(i)].toString() == "double"){
+
+//            if(objWhere.constFind(column.at(i)) == objWhere.constEnd()){
+//                columns.append(column.at(i));
+//                objWhere.insert(column.at(i), valuesColumns.at(i).toDouble());
+//            }
+            objWhere.insert(column.at(i), valuesColumns.at(i).toDouble());
+
+        } else if (types[column.at(i)].toString() == "string"){
+
+//            if(objWhere.constFind(column.at(i)) == objWhere.constEnd()){
+//                columns.append(column.at(i));
+//                objWhere.insert(column.at(i), valuesColumns.at(i));
+//            }
+            objWhere.insert(column.at(i), valuesColumns.at(i));
+        } else if (types[column.at(i)].toString() == "bool"){
+
+//            if(objWhere.constFind(column.at(i)) == objWhere.constEnd()){
+//                columns.append(column.at(i));
+//                objWhere.insert(column.at(i), valuesColumns.at(i));
+//            }
+            objWhere.insert(column.at(i), valuesColumns.at(i));
+
+        }
+    }
+
+    objDelete.insert("columns", columns);
+    objDelete.insert("where", objWhere);
+    QJsonDocument jsonRequest(objDelete);
+
+
+    return jsonRequest.toJson();
+
+}
+
+QByteArray ClientData::changeData(){
+
+
+}

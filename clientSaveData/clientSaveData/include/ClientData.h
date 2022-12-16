@@ -37,6 +37,8 @@ public:
     QByteArray insertDataInTable();
     QByteArray viewsStruct();
     QByteArray readData();
+    QByteArray deleteData();
+    QByteArray changeData();
 
 
 private:

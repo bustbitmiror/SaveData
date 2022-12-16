@@ -479,6 +479,106 @@ void ServerData::slotReadClient(){
             sendToClient(pClientSocket, responseInfo);
 
             dir->cdUp();
+        } else if (proc.value("type").toString() == "DELETE"){
+            QString tableName = proc.value("name").toString();
+
+            if (!dir->exists(tableName)){
+                //откидываем сообщении о несуществовании таблицы
+                QByteArray responseMessage = jsonResponse("The " + tableName + " table does not exist!");
+                sendToClient(pClientSocket, responseMessage);
+                m_NextBlockSize = 0;
+                break;
+            }
+
+            int countRemoveFile = 0;    // счетчик удаленных файлов
+            QJsonObject objWhere = proc.value("where").toObject();
+            QJsonArray col = proc.value("columns").toArray();
+            dir->cd(tableName);
+
+            QFile typesFile(dir->absolutePath() + "/types.entry");
+            if(!typesFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+                // ошибка
+                *conOutput << "File not open!" << Qt::endl << Qt::flush;
+            }
+            QJsonDocument jsonTypes = QJsonDocument::fromJson(typesFile.readAll());
+            typesFile.close();
+            QJsonObject objJson = jsonTypes.object();
+            QJsonArray columnsFromTypes = objJson.value("columns").toArray();
+            QJsonObject objTypesFromTypes = objJson.value("types").toObject();
+
+
+            QStringList listEntry = dir->entryList(QDir::Files);
+            foreach (QString entry, listEntry){
+                if(entry == "types.entry"){
+                    continue;
+                }
+
+                // тут нужна проверка на readLock
+                QFile entryFile(dir->absolutePath() + "/" + entry);
+                if(!entryFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+                    *conOutput << "File not open!" << Qt::endl << Qt::flush;
+                }
+
+                QJsonDocument jsonFile = QJsonDocument::fromJson(entryFile.readAll());
+                entryFile.close();
+                QJsonObject objJson = jsonFile.object();
+
+                bool fullMatch = false;
+                for(int i = 0; i < col.size(); i++){
+                    QString colStr = col.at(i).toString();
+                    QString typeCol = objTypesFromTypes.value(col.at(i).toString()).toString();
+
+                    if (typeCol == "int" || typeCol == "double"){
+                        double valueCol = objJson[colStr].toDouble();
+                        double valueWhereObj = objWhere[colStr].toDouble();
+
+                        if(valueCol == valueWhereObj){
+                            fullMatch = true;
+                        } else {
+                            fullMatch = false;
+                            break;
+                        }
+
+                    } else if (typeCol == "bool") {
+                        bool valueCol = objJson[colStr].toBool();
+                        bool valueWhereObj = objWhere[colStr].toBool();
+
+                        if(valueCol == valueWhereObj){
+                            fullMatch = true;
+                        } else {
+                            fullMatch = false;
+                            break;
+                        }
+
+                    } else if (typeCol == "string") {
+                        QString valueCol = objJson[colStr].toString();
+                        QString valueWhereObj = objWhere[colStr].toString();
+
+                        if(valueCol == valueWhereObj){
+                            fullMatch = true;
+                        } else {
+                            fullMatch = false;
+                            break;
+                        }
+                    }
+
+                }
+
+                if(fullMatch){
+                    QFile::remove(dir->absolutePath() + "/" + entry);
+                    countRemoveFile++;
+                }
+
+            }
+
+            QString outputMessage = QString::number(countRemoveFile) + " files deleted";
+
+
+            QByteArray resp = jsonResponse(outputMessage);
+            sendToClient(pClientSocket, resp); // отправляем структуру
+            dir->cdUp();
+
+
         }
 
         //QString strMessage = QTime::currentTime().toString() + " " + str + '\n';
