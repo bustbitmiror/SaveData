@@ -1,4 +1,6 @@
 #include "include/ServerData.h"
+#include "include/StreamTable.h"
+
 #include <QTcpSocket>
 #include <QTcpServer>
 #include <QObject>
@@ -13,8 +15,10 @@
 #include <QtAlgorithms>
 #include <sstream>
 #include <string>
-#include "include/StreamTable.h"
 #include <QDateTime>
+#include <QThread>
+//#include <csignal>
+//#include <QCoreApplication>
 
 
 ServerData::ServerData(int port) : m_NextBlockSize(0)
@@ -28,12 +32,28 @@ ServerData::ServerData(int port) : m_NextBlockSize(0)
         return;
     }
     connect(m_tcpServer, SIGNAL(newConnection()), this, SLOT(slotNewConnection()));
+    //std::signal(SIGINT, &sExit);
+    //std::signal(SIGTERM, &sExit);
     *conOutput << "Server SaveData. (Listening on 0.0.0.0 " << port << ")\n" << Qt::flush;
 
-    // Проверка папки tables и создание её
+    //logFile = new QFile;
+
     dir = new QDir();
     dir->current();
 
+//    if(!QFile::exists(dir->absolutePath() + "/program.log")){
+//        logFile->setFileName(dir->absolutePath() + "/program.log");
+//        if (!logFile->open(QIODevice::WriteOnly | QIODevice::Append)){
+//            *conOutput << "Error open log file!\n" << Qt::flush;
+//        }
+//    } else {
+//        logFile->setFileName(dir->absolutePath() + "/program.log");
+//        if (!logFile->open(QIODevice::WriteOnly | QIODevice::Append)){
+//            *conOutput << "Error open log file!\n" << Qt::flush;
+//        }
+//    }
+
+    // Проверка папки tables и создание её
     if(!dir->cd("tables")){
         dir->mkdir("tables");
         dir->cd("tables");
@@ -43,14 +63,23 @@ ServerData::ServerData(int port) : m_NextBlockSize(0)
 
 }
 
+
+
 // Обрабатывает каждое подключение 
 void ServerData::slotNewConnection(){
     QTcpSocket* pClientSocket = m_tcpServer->nextPendingConnection();
 
+//    // отдельный поток для каждого подключенного клиента
+//    QThread* sockThread = new QThread(this);
+//    pClientSocket->moveToThread(sockThread);
+//    sockThread->start();
+
     connect(pClientSocket, SIGNAL(disconnected()), this, SLOT(slotDisconnected()));
     connect(pClientSocket, SIGNAL(readyRead()), this, SLOT(slotReadClient()));
 
-    *conOutput << QTime::currentTime().toString() << " New Connection! Client: " << pClientSocket->localAddress().toString() << '\n' << Qt::flush;
+
+
+    *conOutput << QTime::currentTime().toString() << " New Connection! Client: " << pClientSocket->peerAddress().toString() << " Thread: " << pClientSocket->thread() << '\n' << Qt::flush;
 
 }
 
@@ -63,7 +92,6 @@ void ServerData::slotReadClient(){
         if(!m_NextBlockSize){
             if(pClientSocket->bytesAvailable() < sizeof(quint16)){
                 break;
-
             }
             
             in >> m_NextBlockSize;
@@ -134,8 +162,10 @@ void ServerData::slotReadClient(){
             file.close();
             dir->cdUp();
 
+
             QByteArray resp = jsonResponse("The " + tableName + " table has been created.\n");
             sendToClient(pClientSocket, resp);
+            *conOutput << QTime::currentTime().toString() << " Client (" << pClientSocket->peerAddress().toString() << ") : " << "The " + tableName + " table has been created.\n" << Qt::flush;
 
         } else if (proc.value("type").toString() == "INSERT") {         // insert
             //*conOutput << proc.value("type").toString() << Qt::endl << Qt::flush;
@@ -216,8 +246,10 @@ void ServerData::slotReadClient(){
 
             // нужно сообщение для ответа
 
+
             QByteArray resp = jsonResponse("The data is recorded.");
             sendToClient(pClientSocket, resp);
+            *conOutput << QTime::currentTime().toString() << " Client (" << pClientSocket->peerAddress().toString() << ") : " << "Wrote the data to the table " + tableName + " .\n" << Qt::flush;
             dir->cdUp();
 
 
@@ -233,6 +265,7 @@ void ServerData::slotReadClient(){
                 ret << "\t" << listTable.at(i) << Qt::endl;
             }
 
+            *conOutput << QTime::currentTime().toString() << " Client (" << pClientSocket->peerAddress().toString() << ") : " << "I looked at the existing tables.\n" << Qt::flush;
             QByteArray resp = jsonResponse(retMessage);
             sendToClient(pClientSocket, resp);
 
@@ -400,6 +433,7 @@ void ServerData::slotReadClient(){
             dir->cdUp();
             QByteArray resp = jsonResponse(outputTable);
             sendToClient(pClientSocket, resp); // отправляем структуру
+            *conOutput << QTime::currentTime().toString() << " Client (" << pClientSocket->peerAddress().toString() << ") : " << "I looked at the contents of the " + tableName + " table.\n" << Qt::flush;
 
             //*conOutput << outputTable << Qt::flush;
 
@@ -448,6 +482,7 @@ void ServerData::slotReadClient(){
 
             QByteArray resp = jsonResponse(retOutput);
             sendToClient(pClientSocket, resp); // отправляем структуру
+            *conOutput << QTime::currentTime().toString() << " Client (" << pClientSocket->peerAddress().toString() << ") : " << "I looked at the structure of the " + tableName + " table.\n" << Qt::flush;
             dir->cdUp();
         } else if (proc.value("type").toString() == "INFORMATION"){
             QString tableName = proc.value("name").toString();
@@ -488,6 +523,27 @@ void ServerData::slotReadClient(){
                 sendToClient(pClientSocket, responseMessage);
                 m_NextBlockSize = 0;
                 break;
+            }
+
+            if(proc.value("deleteTable").toString() == "yes"){
+                dir->cd(tableName);
+
+                if(dir->removeRecursively()){
+                    dir->cdUp();
+                    *conOutput << QTime::currentTime().toString() << " Client (" << pClientSocket->peerAddress().toString() << ") : " << "Deleted the " + tableName + " table.\n" << Qt::flush;
+                    QByteArray responseMessage = jsonResponse("Deleted the " + tableName + " table.");
+                    sendToClient(pClientSocket, responseMessage);
+                    m_NextBlockSize = 0;
+                    break;
+                } else {
+                    dir->cdUp();
+                    *conOutput << QTime::currentTime().toString() << " Client (" << pClientSocket->peerAddress().toString() << ") : " << "I tried to delete the " + tableName + " table. It didn't work out.\n" << Qt::flush;
+                    QByteArray responseMessage = jsonResponse("I tried to delete the " + tableName + " table. It didn't work out.");
+                    sendToClient(pClientSocket, responseMessage);
+                    m_NextBlockSize = 0;
+                    break;
+                }
+
             }
 
             int countRemoveFile = 0;    // счетчик удаленных файлов
@@ -571,11 +627,12 @@ void ServerData::slotReadClient(){
 
             }
 
-            QString outputMessage = QString::number(countRemoveFile) + " files deleted";
+            QString outputMessage = QString::number(countRemoveFile) + " entries deleted";
 
 
             QByteArray resp = jsonResponse(outputMessage);
             sendToClient(pClientSocket, resp); // отправляем структуру
+            *conOutput << QTime::currentTime().toString() << " Client (" << pClientSocket->peerAddress().toString() << ") : " << "Deleted " + QString::number(countRemoveFile) + " entries.\n" << Qt::flush;
             dir->cdUp();
 
 
@@ -710,14 +767,13 @@ void ServerData::slotReadClient(){
 
             }
 
-            QString outputMessage = QString::number(countChangeFile) + " files changed";
+            QString outputMessage = QString::number(countChangeFile) + " entries changed";
 
 
             QByteArray resp = jsonResponse(outputMessage);
             sendToClient(pClientSocket, resp); // отправляем структуру
+            *conOutput << QTime::currentTime().toString() << " Client (" << pClientSocket->peerAddress().toString() << ") : " << "Changed " + QString::number(countChangeFile) + " entries.\n" << Qt::flush;
             dir->cdUp();
-
-
 
         }
 
@@ -745,7 +801,7 @@ void ServerData::sendToClient(QTcpSocket* pSocket, QByteArray& response){
 void ServerData::slotDisconnected(){
     QTcpSocket* pClientSocket = (QTcpSocket*)sender();
 
-    *conOutput << QTime::currentTime().toString() << " Client (" << pClientSocket->localAddress().toString() << ") disconnected.\n" << Qt::flush;
+    *conOutput << QTime::currentTime().toString() << " Client (" << pClientSocket->peerAddress().toString() << ") disconnected.\n" << Qt::flush;
 
     pClientSocket->deleteLater();
 

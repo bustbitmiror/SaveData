@@ -1,0 +1,14 @@
+{
+    "columns": [
+        "Name",
+        "Old",
+        "Class",
+        "Clan"
+    ],
+    "types": {
+        "Clan": "string",
+        "Class": "string",
+        "Name": "string",
+        "Old": "int"
+    }
+}
