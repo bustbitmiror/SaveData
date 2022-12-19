@@ -176,6 +176,12 @@
 	"HEADERS" : 
 	[
 		[
+			"C:/Projects/SaveData/serverSaveData/serverSaveData/include/Server.h",
+			"Mu",
+			"6YEA5652QU/moc_Server.cpp",
+			null
+		],
+		[
 			"C:/Projects/SaveData/serverSaveData/serverSaveData/include/ServerData.h",
 			"Mu",
 			"6YEA5652QU/moc_ServerData.cpp",
@@ -252,6 +258,11 @@
 	"SETTINGS_FILE" : "C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/serverSaveData_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"C:/Projects/SaveData/serverSaveData/serverSaveData/src/Server.cpp",
+			"Mu",
+			null
+		],
 		[
 			"C:/Projects/SaveData/serverSaveData/serverSaveData/src/ServerData.cpp",
 			"Mu",

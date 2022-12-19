@@ -1,0 +1,10 @@
+{
+    "columns": [
+        "id",
+        "case"
+    ],
+    "types": {
+        "case": "string",
+        "id": "int"
+    }
+}

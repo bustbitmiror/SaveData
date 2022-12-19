@@ -4,11 +4,14 @@ serverSaveData_autogen/timestamp: \
 	C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeSystem.cmake \
 	C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/moc_predefs.h \
 	C:/Projects/SaveData/serverSaveData/serverSaveData/CMakeLists.txt \
+	C:/Projects/SaveData/serverSaveData/serverSaveData/include/Server.h \
 	C:/Projects/SaveData/serverSaveData/serverSaveData/include/ServerData.h \
 	C:/Projects/SaveData/serverSaveData/serverSaveData/include/StreamTable.h \
+	C:/Projects/SaveData/serverSaveData/serverSaveData/src/Server.cpp \
 	C:/Projects/SaveData/serverSaveData/serverSaveData/src/ServerData.cpp \
 	C:/Projects/SaveData/serverSaveData/serverSaveData/src/main.cpp \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/QObject \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/QThread \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qalgorithms.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qanystringview.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qarraydata.h \
@@ -28,17 +31,24 @@ serverSaveData_autogen/timestamp: \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qcontainerfwd.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qcontainerinfo.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qcontainertools_impl.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qcontiguouscache.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qdatastream.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qdeadlinetimer.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qdebug.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qelapsedtimer.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qflags.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qgenericatomic.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qglobal.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qglobalstatic.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qhash.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qhashfunctions.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qiodevice.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qiodevicebase.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qiterable.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qiterator.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qlist.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qlogging.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmap.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmath.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmetacontainer.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmetatype.h \
@@ -55,9 +65,14 @@ serverSaveData_autogen/timestamp: \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qrefcount.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qscopedpointer.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qscopeguard.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qset.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qshareddata.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qshareddata_impl.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qsharedpointer.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qsharedpointer_impl.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstring.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstringalgorithms.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstringconverter.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstringlist.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstringliteral.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstringmatcher.h \
@@ -67,11 +82,19 @@ serverSaveData_autogen/timestamp: \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qsystemdetection.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qtaggedpointer.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qtcore-config.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qtextstream.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qthread.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qtmetamacros.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qtypeinfo.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qutf8stringview.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qvarlengtharray.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qversiontagging.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtNetwork/QTcpServer \
+	C:/Qt6/6.2.0/mingw81_64/include/QtNetwork/qabstractsocket.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtNetwork/qhostaddress.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtNetwork/qtcpserver.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtNetwork/qtnetwork-config.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtNetwork/qtnetworkglobal.h \
 	C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/FindWrapAtomic.cmake \
 	C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/FindWrapOpenSSLHeaders.cmake \
 	C:/Qt6/6.2.0/mingw81_64/lib/cmake/Qt6/Qt6Config.cmake \
@@ -256,6 +279,7 @@ serverSaveData_autogen/timestamp: \
 	C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/string_conversions.h \
 	C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/type_traits.h \
 	C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/functional \
+	C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/future \
 	C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/initializer_list \
 	C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ios \
 	C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/iosfwd \

@@ -1,6 +1,7 @@
 C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/6YEA5652QU/moc_ServerData.cpp: C:/Projects/SaveData/serverSaveData/serverSaveData/include/ServerData.h \
   C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/moc_predefs.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/QObject \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/QThread \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qalgorithms.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qanystringview.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qarraydata.h \
@@ -21,6 +22,8 @@ C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qcontainerinfo.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qcontainertools_impl.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qdatastream.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qdeadlinetimer.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qelapsedtimer.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qflags.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qgenericatomic.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qglobal.h \
@@ -59,6 +62,7 @@ C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qsystemdetection.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qtaggedpointer.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qtcore-config.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qthread.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qtmetamacros.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qtypeinfo.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qutf8stringview.h \
@@ -171,6 +175,7 @@ C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/string_conversions.h \
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/type_traits.h \
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/functional \
+  C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/future \
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/initializer_list \
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ios \
   C:/Qt6/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/iosfwd \

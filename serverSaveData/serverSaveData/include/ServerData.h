@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <QThread>
 
 class QTcpSocket;
 class QTcpServer;
@@ -9,11 +10,13 @@ class QDataStream;
 class QDir;
 //class QFile;
 
-class ServerData : public QObject {
+class ServerData : public QThread {
 Q_OBJECT
 
 private:
-    QTcpServer* m_tcpServer;
+    QTcpSocket* socket;
+    qintptr socketDescriptor;
+
     quint16 m_NextBlockSize;
     QTextStream* conOutput;
     QDir* dir;
@@ -26,12 +29,13 @@ private:
 
 
 public:
-    ServerData(int port);
+    explicit ServerData(qintptr ID, QObject *parent = 0);
+    void run();
     //virtual ~ServerData(){}
 
 
 private slots:
-    void slotNewConnection();
+    //void slotNewConnection();
     void slotReadClient();
     void slotDisconnected();
 };
