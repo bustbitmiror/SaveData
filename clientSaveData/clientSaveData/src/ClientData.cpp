@@ -117,11 +117,13 @@ void ClientData::slotConnectedAndTransfer(){
 
         int choice;
         if (str.toLower() == "exit"){
-            *out << "Exiting...\n";
-            out->flush();
+            *out << "Exiting...\n" << Qt::flush;
             exit(0);
         } else if (str.toLower() == "help"){
-
+            Help();
+            *out << "\n\nPlease press any button...\n" << Qt::flush;
+            std::cin.get();
+            continue;
         } else {
            choice = str.toInt(); // toInt, далее switch(int)
         }
@@ -341,11 +343,36 @@ void ClientData::Menu(){
     *out << "4. Inserting data into a table (insert into ... values ... )\n";
     *out << "5. Reading data from a table (select ... from ... where ... )\n";
     *out << "6. Changing the data in the table (update ... set ... where ...)\n";
-    *out << "7. Deleting rows (delete ... / delete from ... where ... )\n\n";
+    *out << "7. Deleting table/rows (delete ... / delete from ... where ... )\n\n";
     *out << "For reference, enter the command 'help'.\n";
     *out << "To exit, enter the command 'exit'.\n";
     *out << "command > ";
     out->flush();
 
 
+}
+
+
+void ClientData::Help(){
+    std::system("cls");
+    *out << "SaveData reference page.\n\n";
+    *out << "1. Creates a table with your name, columns, and column types.\n";
+    *out << "\tExisting column types: int(11), string(40), double(11), bool(5) (Length in parentheses).\n";
+    *out << "2. Output of existing tables in the database.\n";
+    *out << "3. Displays the structure of the entered table (columns, column types).\n";
+    *out << "4. Adds one entry to the entered table and, accordingly, the entered columns and values.\n";
+    *out << "\tThe position of the column corresponds to the value, otherwise there will be incorrect input.\n";
+    *out << "\tYou cannot repeat the columns.";
+    *out << "\tExample:\n";
+    *out << "\t\tcolumns: id name\n";
+    *out << "\t\tvalues: 0 test\n";
+    *out << "\tHere the column types are int, string\n";
+    *out << "5. Outputs the values of all/specific columns of the table.\n";
+    *out << "\tTo output all the columns at once, type *. Just list the specific ones separated by a space.\n";
+    *out << "6. Modifies data with specific values.\n";
+    *out << "\tTo replace specific columns, list them and write down the values (set).\n";
+    *out << "\tReplacing records with specific values (where).\n";
+    *out << "7. Deletes the entire table or specific records.\n";
+    *out << "\tTo delete specific records, write down the columns and values of the records (where).";
+    out->flush();
 }
