@@ -1,5 +1,7 @@
 C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/6YEA5652QU/moc_Server.cpp: C:/Projects/SaveData/serverSaveData/serverSaveData/include/Server.h \
   C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/moc_predefs.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/QMap \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/QReadWriteLock \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qalgorithms.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qanystringview.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qarraydata.h \
@@ -48,6 +50,7 @@ C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qprocessordetection.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qproperty.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qpropertyprivate.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qreadwritelock.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qrefcount.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qscopedpointer.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qscopeguard.h \

@@ -4,9 +4,11 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+    QMap<QString, QReadWriteLock*> locks;
 
-    Server server;
+    Server server(&locks);
     server.startServer();
 
+    //delete locks;
     return a.exec();
 }

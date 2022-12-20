@@ -3,6 +3,8 @@ C:/Projects/SaveData/serverSaveData/serverSaveData/include/Server.h
  mmc:Q_OBJECT
  mdp:C:/Projects/SaveData/serverSaveData/serverSaveData/include/Server.h
  mdp:C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/moc_predefs.h
+ mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/QMap
+ mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/QReadWriteLock
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qalgorithms.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qanystringview.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qarraydata.h
@@ -51,6 +53,7 @@ C:/Projects/SaveData/serverSaveData/serverSaveData/include/Server.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qprocessordetection.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qproperty.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qpropertyprivate.h
+ mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qreadwritelock.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qrefcount.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qscopedpointer.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qscopeguard.h
@@ -277,6 +280,7 @@ C:/Projects/SaveData/serverSaveData/serverSaveData/include/ServerData.h
  mmc:Q_OBJECT
  mdp:C:/Projects/SaveData/serverSaveData/serverSaveData/include/ServerData.h
  mdp:C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/moc_predefs.h
+ mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/QMap
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/QObject
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/QThread
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qalgorithms.h
@@ -311,6 +315,7 @@ C:/Projects/SaveData/serverSaveData/serverSaveData/include/ServerData.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qiterator.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qlist.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qlogging.h
+ mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmap.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmath.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmetacontainer.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmetatype.h
@@ -328,6 +333,7 @@ C:/Projects/SaveData/serverSaveData/serverSaveData/include/ServerData.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qscopedpointer.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qscopeguard.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qshareddata.h
+ mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qshareddata_impl.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstring.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstringalgorithms.h
  mdp:C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstringlist.h

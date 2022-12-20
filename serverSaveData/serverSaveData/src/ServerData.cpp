@@ -17,16 +17,19 @@
 #include <string>
 #include <QDateTime>
 #include <QThread>
+#include <QMap>
+#include <QReadWriteLock>
 //#include <csignal>
 //#include <QCoreApplication>
 
 
-ServerData::ServerData(qintptr ID, QObject *parent) : m_NextBlockSize(0), QThread(parent)
+ServerData::ServerData(qintptr ID, QMap<QString, QReadWriteLock*>* locks, QObject *parent) : m_NextBlockSize(0), QThread(parent)
 {
     
     conOutput = new QTextStream(stdout);
     //dir = dir;
     this->socketDescriptor = ID;
+    this->locks = locks;
     dir = new QDir;
     dir->current();
 
@@ -217,11 +220,15 @@ void ServerData::slotReadClient(){
             QFile entryF(dir->absolutePath() + "/" + nameEntryFile);
             if(!entryF.open(QIODevice::WriteOnly)){
                 *conOutput << "File open error!" << Qt::endl << Qt::flush;
+                // return или откинуть сообщение пользователю
             }
 
             entryF.write(entryJson.toJson());
             entryF.close();
 
+            // добавляем lock при создании файла
+            QReadWriteLock* lock = new QReadWriteLock;
+            locks->insert(nameEntryFile, lock);
 
             // нужно сообщение для ответа
 
@@ -273,7 +280,7 @@ void ServerData::slotReadClient(){
             QJsonObject objTypesFromTypes = objJson.value("types").toObject();
 
 
-             //рисуем таблицу
+            //рисуем таблицу
 
 
 
@@ -351,14 +358,34 @@ void ServerData::slotReadClient(){
                     continue;
                 }
 
+
                 // тут нужна проверка на readLock
+                if (locks->find(entry) == locks->end()){ // эта блокировка явно появляется в отсуствии
+                    QReadWriteLock* lock = new QReadWriteLock;
+                    locks->insert(entry, lock);
+                }
+
+                if(locks->find(entry) != locks->end()){ // эта блокировка в любом случае
+                    while(true){
+                        if(locks->value(entry)->tryLockForRead() == true){
+                            break;
+                        }
+                    }
+                    //locks->value(entry).lockForRead();
+                }
+
+
+
                 QFile entryFile(dir->absolutePath() + "/" + entry);
                 if(!entryFile.open(QIODevice::ReadOnly | QIODevice::Text)){
                     *conOutput << "File not open!" << Qt::endl << Qt::flush;
+                    locks->value(entry)->unlock();
                 }
 
                 QJsonDocument jsonFile = QJsonDocument::fromJson(entryFile.readAll());
                 entryFile.close();
+                locks->value(entry)->unlock();
+
                 QJsonObject objJson = jsonFile.object();
 
 
@@ -528,13 +555,27 @@ void ServerData::slotReadClient(){
                 }
 
                 // тут нужна проверка на readLock
+
+                if (locks->find(entry) == locks->end()){ // эта блокировка явно появляется в отсуствии
+                    QReadWriteLock* lock = new QReadWriteLock;
+                    locks->insert(entry, lock);
+                }
+
+                if(locks->find(entry) != locks->end()){ // эта блокировка в любом случае
+                    while(locks->value(entry)->tryLockForRead() != true){}
+                    //locks->value(entry).lockForRead();
+                }
+
                 QFile entryFile(dir->absolutePath() + "/" + entry);
                 if(!entryFile.open(QIODevice::ReadOnly | QIODevice::Text)){
                     *conOutput << "File not open!" << Qt::endl << Qt::flush;
+                    locks->value(entry)->unlock();
                 }
 
                 QJsonDocument jsonFile = QJsonDocument::fromJson(entryFile.readAll());
                 entryFile.close();
+                locks->value(entry)->unlock();
+
                 QJsonObject objJson = jsonFile.object();
 
                 bool fullMatch = false;
@@ -579,7 +620,10 @@ void ServerData::slotReadClient(){
                 }
 
                 if(fullMatch){
+                    while(locks->value(entry)->tryLockForRead() != true){}
                     QFile::remove(dir->absolutePath() + "/" + entry);
+                    locks->value(entry)->unlock();
+                    locks->remove(entry);
                     countRemoveFile++;
                 }
 
@@ -630,6 +674,18 @@ void ServerData::slotReadClient(){
                 }
 
                 // тут нужна проверка на readLock
+                if (locks->find(entry) == locks->end()){ // эта блокировка явно появляется в отсуствии
+                    QReadWriteLock* lock = new QReadWriteLock;
+                    locks->insert(entry, lock);
+                }
+
+                if(locks->find(entry) != locks->end()){ // эта блокировка в любом случае
+                    while(locks->value(entry)->tryLockForRead() != true){}
+                    //locks->value(entry).lockForRead();
+                }
+
+
+
                 QFile entryFile(dir->absolutePath() + "/" + entry);
                 if(!entryFile.open(QIODevice::ReadOnly | QIODevice::Text)){
                     *conOutput << "File not open!" << Qt::endl << Qt::flush;
@@ -637,6 +693,7 @@ void ServerData::slotReadClient(){
 
                 QJsonDocument jsonFile = QJsonDocument::fromJson(entryFile.readAll());
                 entryFile.close();
+                locks->value(entry)->unlock();
                 QJsonObject objJson = jsonFile.object();
 
                 bool fullMatch = false;
@@ -711,13 +768,16 @@ void ServerData::slotReadClient(){
 
                     }
 
+                    while(locks->value(entry)->tryLockForWrite() != true){} // lock write
                     if(!entryFile.open(QIODevice::WriteOnly)){
                         *conOutput << "File not open!" << Qt::endl << Qt::flush;
+                        locks->value(entry)->unlock();
                     }
 
                     jsonFile.setObject(objJson);
                     entryFile.write(jsonFile.toJson());
                     entryFile.close();
+                    locks->value(entry)->unlock();
 
                     countChangeFile++;
 

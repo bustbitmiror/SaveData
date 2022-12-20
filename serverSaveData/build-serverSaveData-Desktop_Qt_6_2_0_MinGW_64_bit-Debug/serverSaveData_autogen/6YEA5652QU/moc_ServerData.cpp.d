@@ -1,5 +1,6 @@
 C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/6YEA5652QU/moc_ServerData.cpp: C:/Projects/SaveData/serverSaveData/serverSaveData/include/ServerData.h \
   C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/moc_predefs.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/QMap \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/QObject \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/QThread \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qalgorithms.h \
@@ -34,6 +35,7 @@ C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qiterator.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qlist.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qlogging.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmap.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmath.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmetacontainer.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qmetatype.h \
@@ -51,6 +53,7 @@ C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qscopedpointer.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qscopeguard.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qshareddata.h \
+  C:/Qt6/6.2.0/mingw81_64/include/QtCore/qshareddata_impl.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstring.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstringalgorithms.h \
   C:/Qt6/6.2.0/mingw81_64/include/QtCore/qstringlist.h \

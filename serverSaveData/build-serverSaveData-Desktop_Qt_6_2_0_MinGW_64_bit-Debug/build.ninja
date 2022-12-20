@@ -52,7 +52,7 @@ build cmake_object_order_depends_target_serverSaveData: phony || serverSaveData_
 build CMakeFiles/serverSaveData.dir/serverSaveData_autogen/mocs_compilation.cpp.obj: CXX_COMPILER__serverSaveData_Debug C$:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/mocs_compilation.cpp || cmake_object_order_depends_target_serverSaveData
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_NETWORK_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0601 -D_WIN64
   DEP_FILE = CMakeFiles\serverSaveData.dir\serverSaveData_autogen\mocs_compilation.cpp.obj.d
-  FLAGS = -g -Wno-error=invalid-offsetof -std=gnu++17
+  FLAGS = -DQT_QML_DEBUG -g -DQT_QML_DEBUG -Wno-error=invalid-offsetof -std=gnu++17
   INCLUDES = -IC:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug -IC:/Projects/SaveData/serverSaveData/serverSaveData -IC:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/include -IC:/Projects/SaveData/serverSaveData/serverSaveData/include -IC:/Projects/SaveData/serverSaveData/serverSaveData/src -isystem C:/Qt6/6.2.0/mingw81_64/include/QtCore -isystem C:/Qt6/6.2.0/mingw81_64/include -isystem C:/Qt6/6.2.0/mingw81_64/mkspecs/win32-g++ -isystem C:/Qt6/6.2.0/mingw81_64/include/QtNetwork
   OBJECT_DIR = CMakeFiles\serverSaveData.dir
   OBJECT_FILE_DIR = CMakeFiles\serverSaveData.dir\serverSaveData_autogen
@@ -60,7 +60,7 @@ build CMakeFiles/serverSaveData.dir/serverSaveData_autogen/mocs_compilation.cpp.
 build CMakeFiles/serverSaveData.dir/src/Server.cpp.obj: CXX_COMPILER__serverSaveData_Debug C$:/Projects/SaveData/serverSaveData/serverSaveData/src/Server.cpp || cmake_object_order_depends_target_serverSaveData
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_NETWORK_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0601 -D_WIN64
   DEP_FILE = CMakeFiles\serverSaveData.dir\src\Server.cpp.obj.d
-  FLAGS = -g -Wno-error=invalid-offsetof -std=gnu++17
+  FLAGS = -DQT_QML_DEBUG -g -DQT_QML_DEBUG -Wno-error=invalid-offsetof -std=gnu++17
   INCLUDES = -IC:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug -IC:/Projects/SaveData/serverSaveData/serverSaveData -IC:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/include -IC:/Projects/SaveData/serverSaveData/serverSaveData/include -IC:/Projects/SaveData/serverSaveData/serverSaveData/src -isystem C:/Qt6/6.2.0/mingw81_64/include/QtCore -isystem C:/Qt6/6.2.0/mingw81_64/include -isystem C:/Qt6/6.2.0/mingw81_64/mkspecs/win32-g++ -isystem C:/Qt6/6.2.0/mingw81_64/include/QtNetwork
   OBJECT_DIR = CMakeFiles\serverSaveData.dir
   OBJECT_FILE_DIR = CMakeFiles\serverSaveData.dir\src
@@ -68,7 +68,7 @@ build CMakeFiles/serverSaveData.dir/src/Server.cpp.obj: CXX_COMPILER__serverSave
 build CMakeFiles/serverSaveData.dir/src/ServerData.cpp.obj: CXX_COMPILER__serverSaveData_Debug C$:/Projects/SaveData/serverSaveData/serverSaveData/src/ServerData.cpp || cmake_object_order_depends_target_serverSaveData
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_NETWORK_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0601 -D_WIN64
   DEP_FILE = CMakeFiles\serverSaveData.dir\src\ServerData.cpp.obj.d
-  FLAGS = -g -Wno-error=invalid-offsetof -std=gnu++17
+  FLAGS = -DQT_QML_DEBUG -g -DQT_QML_DEBUG -Wno-error=invalid-offsetof -std=gnu++17
   INCLUDES = -IC:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug -IC:/Projects/SaveData/serverSaveData/serverSaveData -IC:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/include -IC:/Projects/SaveData/serverSaveData/serverSaveData/include -IC:/Projects/SaveData/serverSaveData/serverSaveData/src -isystem C:/Qt6/6.2.0/mingw81_64/include/QtCore -isystem C:/Qt6/6.2.0/mingw81_64/include -isystem C:/Qt6/6.2.0/mingw81_64/mkspecs/win32-g++ -isystem C:/Qt6/6.2.0/mingw81_64/include/QtNetwork
   OBJECT_DIR = CMakeFiles\serverSaveData.dir
   OBJECT_FILE_DIR = CMakeFiles\serverSaveData.dir\src
@@ -76,7 +76,7 @@ build CMakeFiles/serverSaveData.dir/src/ServerData.cpp.obj: CXX_COMPILER__server
 build CMakeFiles/serverSaveData.dir/src/main.cpp.obj: CXX_COMPILER__serverSaveData_Debug C$:/Projects/SaveData/serverSaveData/serverSaveData/src/main.cpp || cmake_object_order_depends_target_serverSaveData
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_NETWORK_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0601 -D_WIN64
   DEP_FILE = CMakeFiles\serverSaveData.dir\src\main.cpp.obj.d
-  FLAGS = -g -Wno-error=invalid-offsetof -std=gnu++17
+  FLAGS = -DQT_QML_DEBUG -g -DQT_QML_DEBUG -Wno-error=invalid-offsetof -std=gnu++17
   INCLUDES = -IC:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug -IC:/Projects/SaveData/serverSaveData/serverSaveData -IC:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/include -IC:/Projects/SaveData/serverSaveData/serverSaveData/include -IC:/Projects/SaveData/serverSaveData/serverSaveData/src -isystem C:/Qt6/6.2.0/mingw81_64/include/QtCore -isystem C:/Qt6/6.2.0/mingw81_64/include -isystem C:/Qt6/6.2.0/mingw81_64/mkspecs/win32-g++ -isystem C:/Qt6/6.2.0/mingw81_64/include/QtNetwork
   OBJECT_DIR = CMakeFiles\serverSaveData.dir
   OBJECT_FILE_DIR = CMakeFiles\serverSaveData.dir\src
@@ -90,7 +90,7 @@ build CMakeFiles/serverSaveData.dir/src/main.cpp.obj: CXX_COMPILER__serverSaveDa
 # Link the executable serverSaveData.exe
 
 build serverSaveData.exe: CXX_EXECUTABLE_LINKER__serverSaveData_Debug CMakeFiles/serverSaveData.dir/serverSaveData_autogen/mocs_compilation.cpp.obj CMakeFiles/serverSaveData.dir/src/Server.cpp.obj CMakeFiles/serverSaveData.dir/src/ServerData.cpp.obj CMakeFiles/serverSaveData.dir/src/main.cpp.obj | C$:/Qt6/6.2.0/mingw81_64/lib/libQt6Network.a C$:/Qt6/6.2.0/mingw81_64/lib/libQt6Core.a || serverSaveData_autogen serverSaveData_autogen_timestamp_deps
-  FLAGS = -g
+  FLAGS = -DQT_QML_DEBUG -g -DQT_QML_DEBUG
   LINK_LIBRARIES = C:/Qt6/6.2.0/mingw81_64/lib/libQt6Network.a  C:/Qt6/6.2.0/mingw81_64/lib/libQt6Core.a  -lmpr  -luserenv  -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\serverSaveData.dir
   POST_BUILD = cd .
@@ -149,7 +149,7 @@ build serverSaveData_autogen/timestamp serverSaveData_autogen/mocs_compilation.c
 #############################################
 # Phony custom command for CMakeFiles\serverSaveData_autogen_timestamp_deps
 
-build CMakeFiles/serverSaveData_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/serverSaveData_autogen_timestamp_deps: phony C$:/Qt6/6.2.0/mingw81_64/./bin/moc.exe C$:/Qt6/6.2.0/mingw81_64/bin/Qt6Network.dll C$:/Qt6/6.2.0/mingw81_64/bin/Qt6Core.dll
+build CMakeFiles/serverSaveData_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/serverSaveData_autogen_timestamp_deps: phony C$:/Qt6/6.2.0/mingw81_64/bin/Qt6Network.dll C$:/Qt6/6.2.0/mingw81_64/./bin/moc.exe C$:/Qt6/6.2.0/mingw81_64/bin/Qt6Core.dll
 
 
 #############################################

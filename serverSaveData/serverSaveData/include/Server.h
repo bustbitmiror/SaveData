@@ -2,20 +2,26 @@
 #define MYSERVER_H
 
 #include <QTcpServer>
+#include <QMap>
+#include <QReadWriteLock>
 
 class QTextStream;
 class QDir;
+
 
 class Server : public QTcpServer
 {
     Q_OBJECT
 public:
-    explicit Server(QObject *parent = 0);
+    explicit Server(QMap<QString, QReadWriteLock*>* locks ,QObject *parent = 0);
     void startServer();
+
+public:
+    QMap<QString, QReadWriteLock*>* _locks;
 
 private:
     QTextStream* conOutput;
-    QDir* dir;
+
 private slots:
     void slotConnection();
      

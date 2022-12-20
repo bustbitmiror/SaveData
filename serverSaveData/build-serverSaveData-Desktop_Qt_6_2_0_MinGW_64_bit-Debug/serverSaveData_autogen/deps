@@ -10,7 +10,9 @@ serverSaveData_autogen/timestamp: \
 	C:/Projects/SaveData/serverSaveData/serverSaveData/src/Server.cpp \
 	C:/Projects/SaveData/serverSaveData/serverSaveData/src/ServerData.cpp \
 	C:/Projects/SaveData/serverSaveData/serverSaveData/src/main.cpp \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/QMap \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/QObject \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/QReadWriteLock \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/QThread \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qalgorithms.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qanystringview.h \
@@ -62,6 +64,7 @@ serverSaveData_autogen/timestamp: \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qprocessordetection.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qproperty.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qpropertyprivate.h \
+	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qreadwritelock.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qrefcount.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qscopedpointer.h \
 	C:/Qt6/6.2.0/mingw81_64/include/QtCore/qscopeguard.h \
