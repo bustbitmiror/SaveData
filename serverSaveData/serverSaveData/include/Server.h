@@ -13,11 +13,12 @@ class Server : public QTcpServer
 {
     Q_OBJECT
 public:
-    explicit Server(QMap<QString, QReadWriteLock*>* locks ,QObject *parent = 0);
+    explicit Server(QMap<QString, QReadWriteLock*>* locks, QMap<QString, QJsonObject*>* cache,QObject *parent = 0);
     void startServer();
 
 public:
     QMap<QString, QReadWriteLock*>* _locks;
+    QMap<QString, QJsonObject*>* _cache;
 
 private:
     QTextStream* conOutput;

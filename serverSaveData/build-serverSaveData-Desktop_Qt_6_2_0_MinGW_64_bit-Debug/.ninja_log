@@ -76,3 +76,12 @@
 10	165	6932712847732543	C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/mocs_compilation.cpp	41e6a1a6abc1fee1
 172	2110	6932712867162563	CMakeFiles/serverSaveData.dir/src/ServerData.cpp.obj	cd8cf58518aa3e1e
 2110	2408	6932712870123077	serverSaveData.exe	b147d3dc9625a0a5
+12	604	6933481146439751	serverSaveData_autogen/timestamp	41e6a1a6abc1fee1
+12	604	6933481146439751	serverSaveData_autogen/mocs_compilation.cpp	41e6a1a6abc1fee1
+12	604	6933481146439751	C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/timestamp	41e6a1a6abc1fee1
+12	604	6933481146439751	C:/Projects/SaveData/serverSaveData/build-serverSaveData-Desktop_Qt_6_2_0_MinGW_64_bit-Debug/serverSaveData_autogen/mocs_compilation.cpp	41e6a1a6abc1fee1
+605	2571	6933481167013590	CMakeFiles/serverSaveData.dir/serverSaveData_autogen/mocs_compilation.cpp.obj	eb75ae4dd3e68205
+613	2578	6933481167101484	CMakeFiles/serverSaveData.dir/src/Server.cpp.obj	ea04a163ce4c9f9
+608	2587	6933481167171849	CMakeFiles/serverSaveData.dir/src/main.cpp.obj	b076e78c0a6c6190
+610	3385	6933481175104846	CMakeFiles/serverSaveData.dir/src/ServerData.cpp.obj	cd8cf58518aa3e1e
+3385	3975	6933481181023685	serverSaveData.exe	b147d3dc9625a0a5

@@ -7,13 +7,14 @@
 #include <QTcpSocket>
 #include <QTcpServer>
 
-Server::Server(QMap<QString, QReadWriteLock*>* locks, QObject *parent) :
+Server::Server(QMap<QString, QReadWriteLock*>* locks, QMap<QString, QJsonObject*>* cache,QObject *parent) :
     QTcpServer(parent)
 {
 
     conOutput = new QTextStream(stdout);
     //locks = new QMap<QString, QReadWriteLock*>();
     _locks = locks;
+    _cache = cache;
 }
 
 void Server::startServer()
@@ -39,7 +40,7 @@ void Server::slotConnection()
     qintptr socketDescriptor = client->socketDescriptor(); // получаем дескриптор сокета
     
 
-    ServerData *thread = new ServerData(socketDescriptor, _locks, this);
+    ServerData *thread = new ServerData(socketDescriptor, _locks, _cache, this);
     
     connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
     

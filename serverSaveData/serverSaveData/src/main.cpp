@@ -5,8 +5,9 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     QMap<QString, QReadWriteLock*> locks;
+    QMap<QString, QJsonObject*> cache;
 
-    Server server(&locks);
+    Server server(&locks, &cache);
     server.startServer();
 
     //delete locks;

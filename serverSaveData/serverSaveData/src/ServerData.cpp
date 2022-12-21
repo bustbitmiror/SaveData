@@ -23,13 +23,14 @@
 //#include <QCoreApplication>
 
 
-ServerData::ServerData(qintptr ID, QMap<QString, QReadWriteLock*>* locks, QObject *parent) : m_NextBlockSize(0), QThread(parent)
+ServerData::ServerData(qintptr ID, QMap<QString, QReadWriteLock*>* locks, QMap<QString, QJsonObject*>* cache,QObject *parent) : m_NextBlockSize(0), QThread(parent)
 {
     
     conOutput = new QTextStream(stdout);
     //dir = dir;
     this->socketDescriptor = ID;
     this->locks = locks;
+    this->cache = cache;
     dir = new QDir;
     dir->current();
 
@@ -93,9 +94,7 @@ void ServerData::slotReadClient(){
         QJsonValue type = proc.value("type");
 
         if(proc.value("type").toString() == "CREATE"){      // create database
-            //*conOutput << proc.value("type").toString() << Qt::endl << Qt::flush;
 
-            //QStringList listFiles = dir->entryList(QDir::Files);
             QString tableName = proc.value("name").toString();
 
             // проверка на существование таблицы
@@ -150,12 +149,9 @@ void ServerData::slotReadClient(){
             *conOutput << QTime::currentTime().toString() << " Client (" << pClientSocket->peerAddress().toString() << ") : " << "The " + tableName + " table has been created.\n" << Qt::flush;
 
         } else if (proc.value("type").toString() == "INSERT") {         // insert
-            //*conOutput << proc.value("type").toString() << Qt::endl << Qt::flush;
 
-
-            //*conOutput << dir->absolutePath() << Qt::endl << Qt::flush;
             QString tableName = proc.value("name").toString();
-            //*conOutput << QFile::exists(dir->absolutePath() + "/" + tableName) << Qt::endl << Qt::flush;
+
             if (!dir->exists(tableName)){
                 //откидываем сообщении о несуществовании таблицы
 
@@ -211,6 +207,8 @@ void ServerData::slotReadClient(){
             }
 
 
+
+
             QJsonDocument entryJson(entry);  // json запись
 
             //int countFile = dir->entryList(QDir::Files).size();
@@ -225,6 +223,10 @@ void ServerData::slotReadClient(){
 
             entryF.write(entryJson.toJson());
             entryF.close();
+
+            // добавляем в кэш файл
+            QJsonObject* entryCache = new QJsonObject(entry);
+            cache->insert(nameEntryFile, entryCache);
 
             // добавляем lock при создании файла
             QReadWriteLock* lock = new QReadWriteLock;
@@ -286,8 +288,7 @@ void ServerData::slotReadClient(){
 
             QStringList listEntry = dir->entryList(QDir::Files);
             QString outputTable;        // таблица для вывода, которую отправим пользователю
-            //QTextStream out(&outputTable);
-            //StreamTable st(out);
+
             std::ostringstream stream;
             StreamTable st(stream);
 
@@ -358,35 +359,46 @@ void ServerData::slotReadClient(){
                     continue;
                 }
 
+                QJsonObject objFileJson;
 
-                // тут нужна проверка на readLock
-                if (locks->find(entry) == locks->end()){ // эта блокировка явно появляется в отсуствии
-                    QReadWriteLock* lock = new QReadWriteLock;
-                    locks->insert(entry, lock);
-                }
-
-                if(locks->find(entry) != locks->end()){ // эта блокировка в любом случае
-                    while(true){
-                        if(locks->value(entry)->tryLockForRead() == true){
-                            break;
-                        }
+                if(cache->find(entry) != cache->end()){
+                    // берем объект файла из cache
+                    objFileJson = *cache->value(entry);
+                } else {
+                    // тут нужна проверка на readLock
+                    if (locks->find(entry) == locks->end()){ // эта блокировка явно появляется в отсуствии
+                        QReadWriteLock* lock = new QReadWriteLock;
+                        locks->insert(entry, lock);
                     }
-                    //locks->value(entry).lockForRead();
-                }
+
+                    if(locks->find(entry) != locks->end()){ // эта блокировка в любом случае
+                        while(true){
+                            if(locks->value(entry)->tryLockForRead() == true){
+                                break;
+                            }
+                        }
+                        //locks->value(entry).lockForRead();
+                    }
 
 
 
-                QFile entryFile(dir->absolutePath() + "/" + entry);
-                if(!entryFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-                    *conOutput << "File not open!" << Qt::endl << Qt::flush;
+                    QFile entryFile(dir->absolutePath() + "/" + entry);
+                    if(!entryFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+                        *conOutput << "File not open!" << Qt::endl << Qt::flush;
+                        locks->value(entry)->unlock();
+                    }
+
+                    QJsonDocument jsonFile = QJsonDocument::fromJson(entryFile.readAll());
+                    entryFile.close();
                     locks->value(entry)->unlock();
+
+                    objFileJson = jsonFile.object();
+                    QJsonObject* entryObjCache = new QJsonObject(objFileJson);
+                    cache->insert(entry, entryObjCache);
+
                 }
 
-                QJsonDocument jsonFile = QJsonDocument::fromJson(entryFile.readAll());
-                entryFile.close();
-                locks->value(entry)->unlock();
 
-                QJsonObject objJson = jsonFile.object();
 
 
 
@@ -397,13 +409,13 @@ void ServerData::slotReadClient(){
                     for (int i = 0; i < columnsFromTypes.size(); i++){
                         if (objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "int" || objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "double"){
 
-                            st << objJson.value(columnsFromTypes.at(i).toString()).toDouble();
+                            st << objFileJson.value(columnsFromTypes.at(i).toString()).toDouble();
                             //*conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toDouble() << " " << Qt::flush;
                         } else if (objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "bool") {
-                            st << objJson.value(columnsFromTypes.at(i).toString()).toBool();
+                            st << objFileJson.value(columnsFromTypes.at(i).toString()).toBool();
                             //*conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toBool() << " " << Qt::flush;
                         } else if (objTypesFromTypes.value(columnsFromTypes.at(i).toString()) == "string") {
-                            st << objJson.value(columnsFromTypes.at(i).toString()).toString().toStdString();
+                            st << objFileJson.value(columnsFromTypes.at(i).toString()).toString().toStdString();
                             //*conOutput << columnsFromTypes.at(i).toString() << ": " << objJson.value(columnsFromTypes.at(i).toString()).toString() << " " << Qt::flush;
                         }
 
@@ -416,13 +428,13 @@ void ServerData::slotReadClient(){
                         if(columnsFromTypes.contains(col.at(i))){
 
                             if (objTypesFromTypes.value(col.at(i).toString()) == "int" || objTypesFromTypes.value(col.at(i).toString()) == "double"){
-                                st << objJson.value(col.at(i).toString()).toDouble();
+                                st << objFileJson.value(col.at(i).toString()).toDouble();
                                 //*conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toDouble() << " " << Qt::flush;
                             } else if (objTypesFromTypes.value(col.at(i).toString()) == "bool") {
-                                st << objJson.value(col.at(i).toString()).toBool();
+                                st << objFileJson.value(col.at(i).toString()).toBool();
                                 //*conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toBool() << " " << Qt::flush;
                             } else if (objTypesFromTypes.value(col.at(i).toString()) == "string") {
-                                st << objJson.value(col.at(i).toString()).toString().toStdString();
+                                st << objFileJson.value(col.at(i).toString()).toString().toStdString();
                                 //*conOutput << col.at(i).toString() << ": " << objJson.value(col.at(i).toString()).toString() << " " << Qt::flush;
                             }
 
@@ -516,6 +528,7 @@ void ServerData::slotReadClient(){
             QJsonObject mainObjTypes = typesTable.object();
             mainObjTypes.insert("type", "information");
             typesTable.setObject(mainObjTypes);
+
             QByteArray responseInfo = typesTable.toJson();
             sendToClient(pClientSocket, responseInfo);
 
@@ -554,29 +567,41 @@ void ServerData::slotReadClient(){
                     continue;
                 }
 
-                // тут нужна проверка на readLock
+                QJsonObject objFileJson;
 
-                if (locks->find(entry) == locks->end()){ // эта блокировка явно появляется в отсуствии
-                    QReadWriteLock* lock = new QReadWriteLock;
-                    locks->insert(entry, lock);
-                }
+                if(cache->find(entry) != cache->end()){
+                    // берем объект файла из cache
+                    objFileJson = *cache->value(entry);
+                } else {
 
-                if(locks->find(entry) != locks->end()){ // эта блокировка в любом случае
-                    while(locks->value(entry)->tryLockForRead() != true){}
-                    //locks->value(entry).lockForRead();
-                }
+                    // тут нужна проверка на readLock
 
-                QFile entryFile(dir->absolutePath() + "/" + entry);
-                if(!entryFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-                    *conOutput << "File not open!" << Qt::endl << Qt::flush;
+                    if (locks->find(entry) == locks->end()){ // эта блокировка явно появляется в отсуствии
+                        QReadWriteLock* lock = new QReadWriteLock;
+                        locks->insert(entry, lock);
+                    }
+
+                    if(locks->find(entry) != locks->end()){ // эта блокировка в любом случае
+                        while(locks->value(entry)->tryLockForRead() != true){}
+                        //locks->value(entry).lockForRead();
+                    }
+
+                    QFile entryFile(dir->absolutePath() + "/" + entry);
+                    if(!entryFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+                        *conOutput << "File not open!" << Qt::endl << Qt::flush;
+                        locks->value(entry)->unlock();
+                    }
+
+                    QJsonDocument jsonFile = QJsonDocument::fromJson(entryFile.readAll());
+                    entryFile.close();
                     locks->value(entry)->unlock();
+
+                    objFileJson = jsonFile.object();
+                    QJsonObject* entryObjCache = new QJsonObject(objFileJson);
+                    cache->insert(entry, entryObjCache);
+
                 }
 
-                QJsonDocument jsonFile = QJsonDocument::fromJson(entryFile.readAll());
-                entryFile.close();
-                locks->value(entry)->unlock();
-
-                QJsonObject objJson = jsonFile.object();
 
                 bool fullMatch = false;
                 for(int i = 0; i < col.size(); i++){
@@ -584,7 +609,7 @@ void ServerData::slotReadClient(){
                     QString typeCol = objTypesFromTypes.value(col.at(i).toString()).toString();
 
                     if (typeCol == "int" || typeCol == "double"){
-                        double valueCol = objJson[colStr].toDouble();
+                        double valueCol = objFileJson[colStr].toDouble();
                         double valueWhereObj = objWhere[colStr].toDouble();
 
                         if(valueCol == valueWhereObj){
@@ -595,7 +620,7 @@ void ServerData::slotReadClient(){
                         }
 
                     } else if (typeCol == "bool") {
-                        bool valueCol = objJson[colStr].toBool();
+                        bool valueCol = objFileJson[colStr].toBool();
                         bool valueWhereObj = objWhere[colStr].toBool();
 
                         if(valueCol == valueWhereObj){
@@ -606,7 +631,7 @@ void ServerData::slotReadClient(){
                         }
 
                     } else if (typeCol == "string") {
-                        QString valueCol = objJson[colStr].toString();
+                        QString valueCol = objFileJson[colStr].toString();
                         QString valueWhereObj = objWhere[colStr].toString();
 
                         if(valueCol == valueWhereObj){
@@ -624,6 +649,7 @@ void ServerData::slotReadClient(){
                     QFile::remove(dir->absolutePath() + "/" + entry);
                     locks->value(entry)->unlock();
                     locks->remove(entry);
+                    cache->remove(entry); // удаляем из кэша
                     countRemoveFile++;
                 }
 
@@ -673,28 +699,40 @@ void ServerData::slotReadClient(){
                     continue;
                 }
 
-                // тут нужна проверка на readLock
-                if (locks->find(entry) == locks->end()){ // эта блокировка явно появляется в отсуствии
-                    QReadWriteLock* lock = new QReadWriteLock;
-                    locks->insert(entry, lock);
+                QJsonObject objFileJson;
+                QJsonDocument jsonFile;
+                if(cache->find(entry) != cache->end()){
+                    // берем объект файла из cache
+                    objFileJson = *cache->value(entry);
+                    jsonFile.setObject(objFileJson);
+                } else {
+                    // тут нужна проверка на readLock
+                    if (locks->find(entry) == locks->end()){ // эта блокировка явно появляется в отсуствии
+                        QReadWriteLock* lock = new QReadWriteLock;
+                        locks->insert(entry, lock);
+                    }
+
+                    if(locks->find(entry) != locks->end()){ // эта блокировка в любом случае
+                        while(locks->value(entry)->tryLockForRead() != true){}
+                        //locks->value(entry).lockForRead();
+                    }
+
+
+
+                    QFile entryFile(dir->absolutePath() + "/" + entry);
+                    if(!entryFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+                        *conOutput << "File not open!" << Qt::endl << Qt::flush;
+                    }
+
+                    jsonFile = QJsonDocument::fromJson(entryFile.readAll());
+                    entryFile.close();
+                    locks->value(entry)->unlock();
+                    objFileJson = jsonFile.object();
+                    QJsonObject* entryObjCache = new QJsonObject(objFileJson);
+                    cache->insert(entry, entryObjCache);
                 }
 
-                if(locks->find(entry) != locks->end()){ // эта блокировка в любом случае
-                    while(locks->value(entry)->tryLockForRead() != true){}
-                    //locks->value(entry).lockForRead();
-                }
 
-
-
-                QFile entryFile(dir->absolutePath() + "/" + entry);
-                if(!entryFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-                    *conOutput << "File not open!" << Qt::endl << Qt::flush;
-                }
-
-                QJsonDocument jsonFile = QJsonDocument::fromJson(entryFile.readAll());
-                entryFile.close();
-                locks->value(entry)->unlock();
-                QJsonObject objJson = jsonFile.object();
 
                 bool fullMatch = false;
                 for(int i = 0; i < colWhere.size(); i++){
@@ -702,7 +740,7 @@ void ServerData::slotReadClient(){
                     QString typeCol = objTypesFromTypes.value(colWhere.at(i).toString()).toString();
 
                     if (typeCol == "int" || typeCol == "double"){
-                        double valueCol = objJson[colStr].toDouble();
+                        double valueCol = objFileJson[colStr].toDouble();
                         double valueWhereObj = objWhere[colStr].toDouble();
 
                         if(valueCol == valueWhereObj){
@@ -713,7 +751,7 @@ void ServerData::slotReadClient(){
                         }
 
                     } else if (typeCol == "bool") {
-                        bool valueCol = objJson[colStr].toBool();
+                        bool valueCol = objFileJson[colStr].toBool();
                         bool valueWhereObj = objWhere[colStr].toBool();
 
                         if(valueCol == valueWhereObj){
@@ -724,7 +762,7 @@ void ServerData::slotReadClient(){
                         }
 
                     } else if (typeCol == "string") {
-                        QString valueCol = objJson[colStr].toString();
+                        QString valueCol = objFileJson[colStr].toString();
                         QString valueWhereObj = objWhere[colStr].toString();
 
                         if(valueCol == valueWhereObj){
@@ -746,8 +784,8 @@ void ServerData::slotReadClient(){
                             //double valueCol = objJson[colStr].toDouble();
                             double valueSetObj = objSet[colStr].toDouble();
 
-                            objJson.erase(objJson.find(colStr)); // удаление старового значения
-                            objJson.insert(colStr, valueSetObj); // добавление нового
+                            objFileJson.erase(objJson.find(colStr)); // удаление старового значения
+                            objFileJson.insert(colStr, valueSetObj); // добавление нового
 
 
 
@@ -755,29 +793,34 @@ void ServerData::slotReadClient(){
                             //bool valueCol = objJson[colStr].toBool();
                             bool valueSetObj = objSet[colStr].toBool();
 
-                            objJson.erase(objJson.find(colStr)); // удаление старового значения
-                            objJson.insert(colStr, valueSetObj); // добавление нового
+                            objFileJson.erase(objJson.find(colStr)); // удаление старового значения
+                            objFileJson.insert(colStr, valueSetObj); // добавление нового
 
                         } else if (typeCol == "string") {
                             //QString valueCol = objJson[colStr].toString();
                             QString valueSetObj = objSet[colStr].toString();
 
-                            objJson.erase(objJson.find(colStr)); // удаление старового значения
-                            objJson.insert(colStr, valueSetObj); // добавление нового
+                            objFileJson.erase(objJson.find(colStr)); // удаление старового значения
+                            objFileJson.insert(colStr, valueSetObj); // добавление нового
                         }
 
                     }
 
                     while(locks->value(entry)->tryLockForWrite() != true){} // lock write
+                    QFile entryFile(dir->absolutePath() + "/" + entry);
                     if(!entryFile.open(QIODevice::WriteOnly)){
                         *conOutput << "File not open!" << Qt::endl << Qt::flush;
                         locks->value(entry)->unlock();
                     }
 
-                    jsonFile.setObject(objJson);
+                    jsonFile.setObject(objFileJson);
                     entryFile.write(jsonFile.toJson());
                     entryFile.close();
                     locks->value(entry)->unlock();
+
+                    cache->remove(entry);
+                    QJsonObject* entryObjCache = new QJsonObject(objFileJson);
+                    cache->insert(entry, entryObjCache);
 
                     countChangeFile++;
 
