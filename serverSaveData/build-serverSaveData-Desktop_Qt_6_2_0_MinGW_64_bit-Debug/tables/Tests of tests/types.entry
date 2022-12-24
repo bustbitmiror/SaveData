@@ -1,10 +1,12 @@
 {
     "columns": [
         "id",
+        "count",
         "case"
     ],
     "types": {
         "case": "string",
+        "count": "int",
         "id": "int"
     }
 }

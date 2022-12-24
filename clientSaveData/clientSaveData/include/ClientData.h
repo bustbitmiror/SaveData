@@ -28,8 +28,8 @@ public:
     ClientData(const QString& host, int port);
 
 
-//commands, типа обработчик команд, общая функция и сами команды
-public:
+//commands, типа обработчик команд, команды
+private:
     enum Command {CREATE_TABLE = 1, SHOW_TABLE = 2, VIEWS_STRUCT = 3, INSERT_DATA = 4, READ_DATA = 5, CHANGE_DATA = 6, DELETE_DATA = 7};
     enum SIZE_TYPE {INT_SIZE = 11, STRING_SIZE = 40, BOOL_SIZE = 5};
     QByteArray createTable();

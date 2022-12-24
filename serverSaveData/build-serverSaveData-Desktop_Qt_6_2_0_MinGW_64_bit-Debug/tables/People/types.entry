@@ -1,0 +1,14 @@
+{
+    "columns": [
+        "id",
+        "firstname",
+        "lastname",
+        "age"
+    ],
+    "types": {
+        "age": "int",
+        "firstname": "string",
+        "id": "int",
+        "lastname": "string"
+    }
+}

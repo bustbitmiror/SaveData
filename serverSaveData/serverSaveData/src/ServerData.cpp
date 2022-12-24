@@ -34,7 +34,7 @@ ServerData::ServerData(qintptr ID, QMap<QString, QReadWriteLock*>* locks, QMap<Q
     dir = new QDir;
     dir->current();
 
-    // Проверка папки tables и создание её
+    // Проверка папки tables или создание её
     if(!dir->cd("tables")){
         dir->mkdir("tables");
         dir->cd("tables");
@@ -722,6 +722,7 @@ void ServerData::slotReadClient(){
                     QFile entryFile(dir->absolutePath() + "/" + entry);
                     if(!entryFile.open(QIODevice::ReadOnly | QIODevice::Text)){
                         *conOutput << "File not open!" << Qt::endl << Qt::flush;
+                        locks->value(entry)->unlock();
                     }
 
                     jsonFile = QJsonDocument::fromJson(entryFile.readAll());
